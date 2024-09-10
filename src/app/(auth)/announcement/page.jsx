@@ -40,7 +40,7 @@ export default function announcement(){
                 <div>
                     <h1 className="text-red-500 font-bold">Feb 19 2022</h1>
                 </div>
-                <button  className="w-full text-start text-[20px] rounded-[7px]">
+                <button  className="w-full text-start text-[20px] rounded-[7px] bg-white">
                     <h1 className="  font-bold">Society Meeting</h1>
                     <h1 className="">Society meeting is held on 1st march 2022 at 7:00pm in the Society Club house </h1>
                 </button>
