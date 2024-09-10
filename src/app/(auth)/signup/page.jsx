@@ -21,13 +21,30 @@ export default function Login() {
                         <div className=' flex flex-col items-center justify-center p-4 gap-4  w-[80%]' >
                             <div className='flex flex-col justify-center items-center'>
                             <div className='font-semibold text-2xl'>
-                                LOGIN
+                                REGISTER
                             </div>
                             <div className='text-gray-400 text-lg'>
-                                Enter your info to LOGIN
+                                Enter your info to register
                             </div>
                             </div>
-            
+                            {/* name */}
+                            <div className='flex gap-5 w-full'>
+                                <div className='flex flex-col w-[50%] '>
+                                    <Label htmlFor="firstname">firstname</Label>
+                                    <div className='flex border-[1px] rounded border-black items-center gap-2 px-2 bg-white'>
+                                    <CgProfile />
+                                    <Input type="text" placeholder="firstname" className=" border-none outline-none" />
+                                    </div>
+                                </div>
+                                <div className='flex flex-col w-[50%]'>
+
+                                    <Label htmlFor="lastname">lastname</Label>
+                                    <div className='flex border-[1px] rounded border-black items-center gap-2 px-2 bg-white'>
+                                    <CgProfile />
+                                    <Input type="text" placeholder="lastname" className=" border-none outline-none" />
+                                    </div>
+                                </div>
+                            </div>
 
 
                         {/* email */}
