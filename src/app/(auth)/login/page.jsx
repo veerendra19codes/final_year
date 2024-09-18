@@ -45,7 +45,7 @@ export default function Login() {
                             <Label htmlFor="email" >Email</Label>
                             <div className='flex border-[1px] rounded border-black items-center gap-2 px-2 bg-white'>
                                 <MdEmail />
-                                <Input type="email" placeholder="Email" className="border-transparent  outline-transparent focus:border-transparent focus:outline-transparent focus:ring-0 shadow-none"
+                                <input type="email" placeholder="Email" className="w-full border-none outline-none focus:border-none focus:outline-none py-2"
                                     onChange={(e) => setEmail(e.target.value)} />
                             </div>
                         </div>
@@ -53,7 +53,7 @@ export default function Login() {
                         {/* password */}
                         <div className='w-full'>
                             <Label htmlFor="email" >password</Label>
-                            <Input type="password" placeholder="password" className="border-[1px] border-black"
+                            <input type="password" placeholder="password" className="w-full border-none outline-none focus:border-none focus:outline-none py-2 border-[1px] border-black"
                                 onChange={(e) => setPassword(e.target.value)} />
                         </div>
 
