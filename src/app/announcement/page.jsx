@@ -3,7 +3,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { FaSearch } from "react-icons/fa";
 export default function announcement(){
     return(
-            <div className=" bg-gray-100">
+            <div className=" bg-slate-100 min-h-screen">
 <div className="flex flex-col ">
             {/* navbar */}
             <div className="flex  bg-white flex-row justify-between pl-[30px] pt-[26px] py-[6px]"> 
@@ -36,29 +36,29 @@ export default function announcement(){
                 <button className="w-full border-2 bg-white rounded-full px-6 py-2 text-lg ">Add Announcement</button>
             </div>
             {/* Feb 19 2022 */}
-            <div className="flex flex-col mt-[22px] pl-[25px] bg-white">
+            <div className="flex flex-col mt-[22px] pl-[25px] bg-white gap-3 px-[50px]">
                 <div>
                     <h1 className="text-red-500 font-bold">Feb 19 2022</h1>
                 </div>
-                <button  className="w-full text-start text-[20px] rounded-[7px] bg-white">
+                <button  className="w-full text-start text-[20px] rounded-[7px] shadow-xl bg-white">
                     <h1 className="  font-bold">Society Meeting</h1>
                     <h1 className="">Society meeting is held on 1st march 2022 at 7:00pm in the Society Club house </h1>
                 </button>
-                <button  className="w-full text-start text-[20px]">
+                <button  className="w-full text-start text-[20px] shadow-xl">
                     <h1 className="  font-bold">Society Meeting</h1>
                     <h1 className="">Society meeting is held on 1st march 2022 at 7:00pm in the Society Club house </h1>
                 </button>
-                <button  className="w-full text-start text-[20px]">
+                <button  className="w-full text-start text-[20px] shadow-xl">
                     <h1 className="  font-bold">Society Meeting</h1>
                     <h1 className="">Society meeting is held on 1st march 2022 at 7:00pm in the Society Club house </h1>
                 </button>
                 </div>
             {/* 2nd one */}
-            <div className="flex flex-col mt-[22px] pl-[25px] bg-white">
+            <div className="flex flex-col mt-[22px] pl-[25px] bg-white shadow-xl">
                 <div>
                     <h1 className="text-red-500 font-bold">Feb 19 2022</h1>
                 </div>
-                <button  className="w-full text-start  font-bold text-[20px]">Society Meeting</button>
+                <button  className="w-full text-start  font-bold text-[20px] ">Society Meeting</button>
                 <h1>Society meeting is held on 1st march 2022 at 7:00pm in the Society Club house </h1>
                 
             </div>
