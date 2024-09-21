@@ -4,7 +4,7 @@ import GoogleMapComponent from '../../../src/components/GoogleMap.js';
 
 const Neighbourhood = () => {
   const [userLocation, setUserLocation] = useState(null);
-  const googleApiKey = 'AIzaSyDd880t6fiSego_BChsKmPYtWHiuIkOhuw'; // Use environment variables in production
+  const googleApiKey = process.env.GOOGLE_MAPS_API_KEY; // Use environment variables in production
 
   useEffect(() => {
     // Get user's real-time location
@@ -31,10 +31,10 @@ const Neighbourhood = () => {
       <section className="mb-8">
         <h2 className="text-xl font-bold mb-4">Nearby Police Stations</h2>
         <div className="border rounded-lg p-4 shadow-md">
-          <GoogleMapComponent 
-            apiKey={googleApiKey} 
-            placesType="police" 
-            userLocation={userLocation} 
+          <GoogleMapComponent
+            apiKey={googleApiKey}
+            placesType="police"
+            userLocation={userLocation}
           />
         </div>
       </section>
@@ -43,10 +43,10 @@ const Neighbourhood = () => {
       <section className="mb-8">
         <h2 className="text-xl font-bold mb-4">Nearby Hospitals</h2>
         <div className="border rounded-lg p-4 shadow-md">
-          <GoogleMapComponent 
-            apiKey={googleApiKey} 
-            placesType="hospital" 
-            userLocation={userLocation} 
+          <GoogleMapComponent
+            apiKey={googleApiKey}
+            placesType="hospital"
+            userLocation={userLocation}
           />
         </div>
       </section>
@@ -55,10 +55,10 @@ const Neighbourhood = () => {
       <section className="mb-8">
         <h2 className="text-xl font-bold mb-4">Nearby Metro Stations</h2>
         <div className="border rounded-lg p-4 shadow-md">
-          <GoogleMapComponent 
-            apiKey={googleApiKey} 
-            placesType="subway_station" 
-            userLocation={userLocation} 
+          <GoogleMapComponent
+            apiKey={googleApiKey}
+            placesType="subway_station"
+            userLocation={userLocation}
           />
         </div>
       </section>

@@ -4,6 +4,7 @@ const page = () => {
     return (
         <div>
             New page changed state
+            Mere changes
         </div>
     )
 }
