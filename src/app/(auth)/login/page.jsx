@@ -9,6 +9,7 @@ import { CgProfile } from "react-icons/cg";
 import { MdEmail } from "react-icons/md";
 import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
+import Link from 'next/link';
 
 export default function Login() {
     const router = useRouter();
@@ -17,13 +18,12 @@ export default function Login() {
 
     return (
         <div className="min-h-screen bg-black flex justify-center items-center">
-            <div className=" flex w-[80%] h-[80%] bg-white justify-center items-center rounded-2xl ">
+            <div className=" flex w-[80%] h-[80%] bg-blue-500 justify-center items-center rounded-2xl ">
 
-                <div className='bg-blue-500 w-[50%] h-auto'>
-                    hi
+                <div className='bg-blue-500 w-[50%] h-ful'>
 
                 </div>
-                <div className='flex bg-gray-100 w-[50%] items-center justify-center rounded-xl py-8'>
+                <div className='flex bg-gray-100 w-[50%] items-center justify-center rounded-r-xl py-8'>
 
 
                     {/* form */}
@@ -45,7 +45,7 @@ export default function Login() {
                             <Label htmlFor="email" >Email</Label>
                             <div className='flex border-[1px] rounded border-black items-center gap-2 px-2 bg-white'>
                                 <MdEmail />
-                                <Input type="email" placeholder="Email" className="border-transparent  outline-transparent focus:border-transparent focus:outline-transparent focus:ring-0 shadow-none"
+                                <input type="email" placeholder="Email" className="w-full border-none outline-none focus:border-none focus:outline-none py-2"
                                     onChange={(e) => setEmail(e.target.value)} />
                             </div>
                         </div>
@@ -53,13 +53,13 @@ export default function Login() {
                         {/* password */}
                         <div className='w-full'>
                             <Label htmlFor="email" >password</Label>
-                            <Input type="password" placeholder="password" className="border-[1px] border-black"
+                            <input type="password" placeholder="password" className="w-full pl-4 focus:outline-none py-2 border-[1px] border-black"
                                 onChange={(e) => setPassword(e.target.value)} />
                         </div>
 
                         {/* button */}
                         <div>
-                            <Button className="bg-blue-500" onClick={async () => {
+                            <Button className="bg-blue-500 hover:bg-blue-400" onClick={async () => {
                                 const res = await signIn("credentials", {
                                     redirect: false,
                                     email,
@@ -69,6 +69,8 @@ export default function Login() {
                                 router.push("/")
                             }}>Login</Button>
                         </div>
+
+                        <div className="text-gray-500">Don&apos;t have an account? <Link href="/signup" className="text-blue-500 underline hover:text-blue-400">Sign up</Link> </div>
                     </div>
                 </div>
 
