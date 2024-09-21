@@ -3,7 +3,7 @@ import React from 'react'
 const page = () => {
     return (
         <div>
-            NEw oage
+            New page changed state
         </div>
     )
 }
