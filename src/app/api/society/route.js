@@ -1,5 +1,7 @@
 import { connectdb } from "@/lib/db";
-import {Society} from "@lib/models" 
+// import Society from "@lib/model"
+import models from "@/lib/models"
+const Society = models.Society
 import { NextRequest, NextResponse } from "next/server";
 export async function POST(req){
     try {
@@ -8,12 +10,14 @@ export async function POST(req){
         //connect
         // connect 2
         //destructure your things
-        const{name,address,image,secretary}=await req.json();
-        console.log(name,address,image,secretary);
+        // const body=await req.json();
+        const{name,address,images,secretary}=await req.json();
+        // console.log(body);
+        // console.log(name,address,image,secretary);
         const newSociety=await Society.create({
             name,
             address,
-            image,
+            images,
             secretary
         })
         return NextResponse.json({
