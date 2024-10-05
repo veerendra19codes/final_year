@@ -4,7 +4,8 @@ import GoogleMapComponent from '../../../src/components/GoogleMap.js';
 
 const Neighbourhood = () => {
   const [userLocation, setUserLocation] = useState(null);
-  const googleApiKey = process.env.GOOGLE_MAPS_API_KEY; // Use environment variables in production
+  console.log(process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY)
+  const googleApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY; // Use environment variables in production
 
   useEffect(() => {
     // Get user's real-time location
