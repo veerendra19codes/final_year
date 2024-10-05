@@ -20,7 +20,7 @@ const Navbar = () => {
                         SignOut
                     </Button>
                     :
-                    <Button className="bg-blue-500 hover:bg-blue-300" onClick={() => signIn()}>
+                    <Button className="bg-blue-500 hover:bg-blue-300 mx-4" onClick={() => signIn()}>
                         SignIn
                     </Button>
                 }

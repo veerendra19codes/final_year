@@ -16,45 +16,7 @@ import {
 } from "@/components/ui/alert"
 import { AlertCircle } from "lucide-react"
 
-export default function Signup() {
-
-    const router = useRouter();
-    const [firstname, setFirstname] = useState("");
-    const [lastname, setLastname] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [error, setError] = useState(false);
-    const [errorMessage, setErrorMessage] = useState("");
-
-    const handleRegister = async (e) => {
-        e.preventDefault();
-        try {
-            console.log("firsname: ", firstname);
-            const res = await fetch("/api/signup", {
-                method: "POST",
-                body: JSON.stringify({
-                    firstname,
-                    lastname,
-                    email,
-                    password
-                })
-            })
-            console.log("res:", res);
-            const data = await res.json();
-            console.log("data: ", data)
-
-            if (data.status == 200) {
-                router.push('/login')
-            }
-            else {
-                setError(!error);
-                setErrorMessage(data.message);
-            }
-        } catch (error) {
-            console.log("error in registering: ", error);
-        }
-    }
-
+const NewSociety = () => {
     return (
         <div className="min-h-screen bg-black flex justify-center items-center">
             <div className=" flex w-[80%] h-[80%] bg-blue-500 justify-center items-center rounded-2xl ">
@@ -68,23 +30,23 @@ export default function Signup() {
                     <div className=' flex flex-col items-center justify-center p-4 gap-4  w-[80%]' >
                         <div className='flex flex-col justify-center items-center'>
                             <div className='font-semibold text-2xl'>
-                                REGISTER
+                                Add a new Society
                             </div>
                             <div className='text-gray-400 text-lg'>
-                                Enter your info to register
+                                Enter your info to add
                             </div>
                         </div>
                         {/* name */}
                         <div className='flex gap-5 w-full'>
                             <div className='flex flex-col w-[50%] '>
-                                <Label htmlFor="firstname">firstname</Label>
+                                <Label htmlFor="name">name</Label>
                                 <div className='flex border-[1px] rounded border-black items-center gap-2 px-2 bg-white'>
                                     <CgProfile />
-                                    <input type="text" placeholder="Firstname" className="w-full border-none outline-none focus:border-none focus:outline-none py-2" value={firstname}
+                                    <input type="text" placeholder="name" className="w-full border-none outline-none focus:border-none focus:outline-none py-2" value={name}
                                         onChange={(e) => {
                                             setError(false);
                                             setErrorMessage("");
-                                            setFirstname(e.target.value)
+                                            setName(e.target.value)
                                         }
                                         } />
                                 </div>
@@ -157,3 +119,5 @@ export default function Signup() {
         </div>
     )
 }
+
+export default NewSociety

@@ -1,4 +1,7 @@
 import CredentialsProvider from 'next-auth/providers/credentials';
+import models from "@/lib/models";
+import { NextResponse } from 'next/server';
+const User = models.User;
 
 export const NEXT_AUTH_CONFIG = {
     providers: [
@@ -9,13 +12,17 @@ export const NEXT_AUTH_CONFIG = {
             password: { label: 'password', type: 'password', placeholder: '' },
           },
           async authorize(credentials) {
-                console.log("credentials:", credentials);
+              console.log("credentials:", credentials);
 
-                //check this credentials exist in the db or not and send null if not and send user details in session if exists
+              //check this credentials exist in the db or not and send null if not and send user details in session if exists
+              const exists = await User.findOne({email: credentials.email})
+              if(!exists) {
+                return NextResponse.json({message: "User does not exists", status: 411})
+              }
+
               return {
-                  id: "user1",
-                  name: credentials.email,
-                  userId: "asd",
+                  id: exists._id,
+                  name: credentials.firstname,
                   email: credentials.email,
               };
           },
@@ -38,5 +45,6 @@ export const NEXT_AUTH_CONFIG = {
     },
     pages: {
         signIn: "/login",
+        signUp: "/signup",
     }
   }
