@@ -5,6 +5,7 @@ export async function POST(req){
     try {
         //connect wiht database each time
         await connectdb();
+        //connect
         //destructure your things
         const{name,address,image,secretary}=await req.json();
         console.log(name,address,image,secretary);
