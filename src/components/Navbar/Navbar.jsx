@@ -16,7 +16,7 @@ const Navbar = () => {
     useEffect(() => {
         if ((path == "login" || path == "signup") && session.status == "authenticated") router.replace("/");
         if (session.status == "unauthenticated") router.replace("/login");
-    }, [])
+    }, [path, router, session.status])
 
     if (path == "/login" || path == "/signup") return null;
 
