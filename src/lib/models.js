@@ -1,5 +1,8 @@
 import mongoose from "mongoose";
 
+let Society;
+let User;
+
 const userSchema = new mongoose.Schema({
     firstname: {
         type: String,
@@ -23,7 +26,31 @@ const userSchema = new mongoose.Schema({
         trim: true,
     },
 })
-let User;
+
+const societySchema = new mongoose.Schema({
+    name: {
+        type: String,
+        required: true,
+        trim: true,
+    },
+    address: {
+        type: String,
+        required: true,
+        trim: true,
+    },
+    images: {
+        type: String,
+        unique: true,
+        required: true,
+        trim: true,
+    },
+    secretary: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: User,
+        required: true,
+        trim: true,
+    },
+})
 
 try {
   // Try to get the existing model
@@ -33,5 +60,14 @@ try {
   User = mongoose.model("User", userSchema);
 }
 
-const models = {User}
+try {
+  // Try to get the existing model
+  Society = mongoose.model("Society");
+} catch (error) {
+  // If the model does not exist, create a new one
+  Society = mongoose.model("Society", societySchema);
+}
+
+
+const models = { User, Society }
 export default models;
