@@ -12,19 +12,30 @@ export const NEXT_AUTH_CONFIG = {
             password: { label: 'password', type: 'password', placeholder: '' },
           },
           async authorize(credentials) {
-              console.log("credentials:", credentials);
 
-              //check this credentials exist in the db or not and send null if not and send user details in session if exists
-              const exists = await User.findOne({email: credentials.email})
-              if(!exists) {
-                return NextResponse.json({message: "User does not exists", status: 411})
-              }
+              try {
+                console.log("credentials:", credentials);
 
-              return {
+                // //check this credentials exist in the db or not and send null if not and send user details in session if exists
+                const exists = await User.findOne({email: credentials.email});
+                console.log("exists: ", exists);
+
+                if(!exists) {
+                  return NextResponse.json({message: "User does not exists", status: 411})
+                }
+
+                return {
+                    id: exists._id,
+                    email: credentials.email,
+                };
+              } catch (error) {
+                console.log("error in login: ", error);
+                return {
                   id: exists._id,
-                  name: credentials.firstname,
                   email: credentials.email,
-              };
+                };
+              }
+              
           },
         }),
     ],
@@ -45,6 +56,6 @@ export const NEXT_AUTH_CONFIG = {
     },
     pages: {
         signIn: "/login",
-        signUp: "/signup",
+        // signUp: "/signup",
     }
   }

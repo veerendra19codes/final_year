@@ -25,33 +25,44 @@ const userSchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
-})
+}, { timestamps: true})
 
 const societySchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
         trim: true,
+        unique: true
     },
     address: {
         type: String,
         required: true,
         trim: true,
     },
-    images: {
+    image_public_id: {
         type: String,
         unique: true,
-        required: true,
+        // required: true,
         trim: true,
     },
     secretary: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
-        ref: "User",
         required: true,
         trim: true,
-    }
-})
+    },
+    password: {
+        type: String,
+        required: true,
+        trim: true,
+    },
+    members: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+        }
+    ]
+}, {timestamps: true})
 
 try {
   // Try to get the existing model

@@ -13,12 +13,12 @@ const Navbar = () => {
     const router = useRouter();
 
     console.log("session: ", session);
-    useEffect(() => {
-        if ((path == "login" || path == "signup") && session.status == "authenticated") router.replace("/");
-        if (session.status == "unauthenticated") router.replace("/login");
-    }, [path, router, session.status])
+    // useEffect(() => {
+    //     if ((path == "login" || path == "signup") && session.status == "authenticated") router.replace("/");
+    //     else if (session.status == "unauthenticated") router.replace("/login");
+    // }, [path, router, session.status])
 
-    if (path == "/login" || path == "/signup") return null;
+    // if (path == "/login" || path == "/signup") return null;
 
     return (
         <div className="w-full h-16 shadow-xl flex justify-between p-2 items-center">
