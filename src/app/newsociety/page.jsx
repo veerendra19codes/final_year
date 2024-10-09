@@ -27,6 +27,13 @@ const NewSociety = () => {
     const [publicId, setPublicId] = useState("");
     const [error, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+
+    const reset = () => {
+        setName("");
+        setAddress("");
+        setPassword("");
+        setPublicId("");
+    }
     const handleRegister = async () => {
         try {
             console.log("name: ", name);
@@ -42,47 +49,13 @@ const NewSociety = () => {
                 method: "POST"
             })
             console.log("res: ", res);
+            reset();
+            alert("added");
+
         } catch (error) {
             console.log("error in registering a society: ", error);
         }
     }
-
-    const [image, setImage] = useState(null);
-    const [uploading, setUploading] = useState(false);
-    const [uploadedUrl, setUploadedUrl] = useState("");
-
-    const handleChange = (e) => {
-        setImage(e.target.files[0]);
-    };
-
-    const handleUpload = async (e) => {
-        e.preventDefault();
-        if (!image) return;
-
-        setUploading(true);
-        const formData = new FormData();
-        formData.append("image", image);
-
-        try {
-            const response = await fetch("/api/upload", {
-                method: "POST",
-                body: formData,
-            });
-
-            if (!response.ok) {
-                throw new Error("Failed to upload image");
-            }
-
-            const data = await response.json();
-            setUploadedUrl(data.url); // Get the uploaded image URL
-            alert("Upload successful!");
-        } catch (error) {
-            console.error("Error uploading image:", error);
-            alert("Upload failed");
-        } finally {
-            setUploading(false);
-        }
-    };
 
 
     return (
@@ -133,7 +106,7 @@ const NewSociety = () => {
                                     {({ open }) => {
                                         return (
                                             <button onClick={() => open()} className="bg-blue-500 text-white py-2 px-4 rounded-lg w-full">
-                                                Upload
+                                                {publicId ? "Uploaded" : "Upload"}
                                             </button>
                                         );
                                     }}

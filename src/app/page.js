@@ -15,7 +15,7 @@ export default function Home() {
           </p>
           <div className="flex gap-4 justify-center items-start">
 
-            <button className="rounded-3xl px-8 py-2 bg-blue-500 text-white"> + Join a society</button>
+            <Link href="/joinsociety" className="rounded-3xl px-8 py-2 bg-blue-500 text-white"> + Join a society</Link>
             <Link href="/newsociety" className="rounded-3xl px-8 py-2 bg-blue-500 text-white">Create a society profile</Link>
           </div>
 

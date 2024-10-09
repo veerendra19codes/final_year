@@ -46,8 +46,7 @@ const societySchema = new mongoose.Schema({
         trim: true,
     },
     secretary: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
+        type: String,
         required: true,
         trim: true,
     },

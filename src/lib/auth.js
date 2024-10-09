@@ -27,12 +27,16 @@ export const NEXT_AUTH_CONFIG = {
                 return {
                     id: exists._id,
                     email: credentials.email,
+                    firstname: credentials.firstname,
+                    lastname: credentials.lastname
                 };
               } catch (error) {
                 console.log("error in login: ", error);
                 return {
                   id: exists._id,
                   email: credentials.email,
+                  firstname: credentials.firstname,
+                  lastname: credentials.lastname
                 };
               }
               
@@ -44,12 +48,16 @@ export const NEXT_AUTH_CONFIG = {
         jwt: async ({ user, token }) => {
         if (user) {
             token.uid = user.id;
+            token.firstname = user.firstname,
+            token.lastname = user.lastname
         }
         return token;
         },
       session: ({ session, token, user }) => {
           if (session.user) {
-              session.user.id = token.uid
+              session.user.id = token.uid,
+              session.firstname = token.firstname,
+              session.lastname = token.lastname
           }
           return session
       }

@@ -8,6 +8,13 @@ export async function POST(req) {
         await connectdb();
         const { name, address, secretary, password, publicId}  = await req.json();
 
+        const exists = await Society.findOne({name});
+        
+        if(exists) {
+            console.log("this society already exists: ", exists);
+            return NextResponse.json({message: "This society aleady exists"})
+        }
+
         const newsoc = await Society.create({
             name,
             address,
@@ -20,6 +27,8 @@ export async function POST(req) {
         console.log("name: ", name);
         return NextResponse.json({message: "success"})
     } catch (error) {
+
         console.log("error in registering a new soc: ", error);
+        return NextResponse.json({message: "error in adding new society"})
     }
 }
