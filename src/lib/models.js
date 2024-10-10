@@ -5,7 +5,7 @@ let User;
 let Registry;
 let Event;
 let Complaint;
-
+let Utility;
 
 // Existing User schema
 const userSchema = new mongoose.Schema({
@@ -40,6 +40,18 @@ const userSchema = new mongoose.Schema({
         type: Number,
         default: 10000, 
     },
+    members:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+        }
+    ],
+    membersName:[
+        {
+            type: String,
+            
+        }
+    ],
     maintenanceStatus: {
         type: String,
         enum: ["paid", "unpaid"],
@@ -145,7 +157,7 @@ const eventSchema = new mongoose.Schema({
 
 
 
-const Utility= new mongoose.Schema({
+const utilitySchema= new mongoose.Schema({
     name:{
         type: String,
         required: true,
@@ -167,11 +179,7 @@ const Utility= new mongoose.Schema({
         trim: true,
         }
     ],
-    image:{
-        type: String,
-        required: true,
-        trim: true,
-    },
+    
     utilityType: {
         type: String,
         required: true,
@@ -227,9 +235,9 @@ try {
 }
 
 try {
-    User = mongoose.model("Utility");
+    Utility = mongoose.model("Utility");
 } catch (error) {
-    User = mongoose.model("Utility", Utility);
+    Utility = mongoose.model("Utility", utilitySchema);
 }
 
 
