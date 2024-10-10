@@ -21,7 +21,7 @@ export async function POST(req) {
 
     if (!society.members.includes(userId)) {
      
-      console.log(userId + " is already in the members array")
+    //   console.log(userId + " is already in the members array")
       society.members.push(userId);
     } else {
       return NextResponse.json({ message: "User is already a member of this society" }, { status: 400 });
@@ -36,3 +36,22 @@ export async function POST(req) {
     return NextResponse.json({ message: "Something went wrong", error }, { status: 500 });
   }
 }
+
+//to get all the members ka detials
+export async function GET(req){
+  try{
+    await connectdb();
+  const { societyName } = await req.json(); 
+  console.log(societyName);
+
+  const society = await Society.findOne({ name: societyName });
+  if (!society) {
+    return NextResponse.json({ message: "Society not found" }, { status: 404 });
+  }
+  const members=society.members;
+  return NextResponse.json({ data:members }, { status: 200 });
+  }catch(error){
+    console.log(error);
+  }
+
+} 
