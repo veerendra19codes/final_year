@@ -29,7 +29,7 @@ export default function RootLayout({ children }) {
         <Providers>
           <div className="flex h-screen overflow-hidden">
             <Sidebar />
-            <main className="flex-1 overflow-auto p-4">
+            <main className="flex-1 overflow-auto">
               {children}
             </main>
           </div>

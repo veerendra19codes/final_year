@@ -2,6 +2,7 @@ import { connectdb } from "@/lib/db";
 import { NextResponse } from "next/server";
 import models from "@/lib/models";
 const Society = models.Society;
+const User = models.User;
 
 export async function POST(req) {
     try {
@@ -24,7 +25,15 @@ export async function POST(req) {
         })
         console.log("newsoc:", newsoc);
 
-        console.log("name: ", name);
+        const updatedUser = await User.findOneAndUpdate({name: secretary}, {
+            $set: {
+                society: newsoc.name,
+                societyId: newsoc.id,
+            }
+        })
+
+
+        console.log("updatedUser: ", updatedUser);
         return NextResponse.json({message: "success"})
     } catch (error) {
 

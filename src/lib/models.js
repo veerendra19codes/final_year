@@ -5,7 +5,8 @@ let User;
 let Registry;
 let Event;
 let Complaint;
-
+let Utility;
+let Announcements;
 
 // Existing User schema
 const userSchema = new mongoose.Schema({
@@ -17,6 +18,11 @@ const userSchema = new mongoose.Schema({
     lastname: {
         type: String,
         required: true,
+        trim: true,
+    },
+    name: {
+        type: String,
+        // required: true,
         trim: true,
     },
     email: {
@@ -49,6 +55,14 @@ const userSchema = new mongoose.Schema({
         type: Date, 
         default: null, 
     },
+     society: {
+        type: String,
+        trim: true,
+    },
+    societyId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Society",
+    }
 }, { timestamps: true });
 
 // Existing Society schema
@@ -126,26 +140,34 @@ const eventSchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
-    timings: {
+    description: {
         type: String,
-        required: true,
-        trim: true,
+        trim: true
     },
-    date: {
+    image: {
+        type: String,
+    },
+    scheduledAt: {
+        type: Date,
+    },
+    listedAt: {
         type: Date,
         required: true,
         default: Date.now,
     },
-    society: {
+    societyId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Society",
         required: true,
+    },
+    society: {
+        type: String,
+        trim: true
     }
 }, { timestamps: true });
 
 
-
-const Utility= new mongoose.Schema({
+const utilitySchema = new mongoose.Schema({
     name:{
         type: String,
         required: true,
@@ -186,9 +208,8 @@ const Utility= new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "Society", 
         required: true,
-    },
-    
-});
+    }
+}, {timestamps: true});
 
 // New Complaint schema
 const complaintSchema = new mongoose.Schema({
@@ -219,19 +240,42 @@ const complaintSchema = new mongoose.Schema({
     }
 }, { timestamps: true });
 
+const announcementsSchema = new mongoose.Schema({
+    title: {
+        type: String,
+        required: true,
+        trim: true,
+    },
+    content: {
+        type: String,
+        // required: true,
+        trim: true,
+    },
+    date: {
+        type: Date,
+        required: true,
+        default: Date.now,
+    },
+    society: {
+        type: String,
+    },  
+    societyId: {
+type: mongoose.Schema.Types.ObjectId,
+        ref: "Society",
+        required: true,
+    },
+    secretary: {
+        type: String
+    }
+}, { timestamps: true });
+
+
 
 try {
     User = mongoose.model("User");
 } catch (error) {
     User = mongoose.model("User", userSchema);
 }
-
-try {
-    User = mongoose.model("Utility");
-} catch (error) {
-    User = mongoose.model("Utility", Utility);
-}
-
 
 try {
     Society = mongoose.model("Society");
@@ -257,6 +301,18 @@ try {
     Complaint = mongoose.model("Complaint", complaintSchema);
 }
 
+try {
+    Utility = mongoose.model("Utility");
+} catch (error) {
+    Utility= mongoose.model("Utility", utilitySchema);
+}
 
-const models = { User, Society, Registry, Event,Complaint,Utility};
+try {
+    Announcements = mongoose.model("Announcements");
+} catch (error) {
+    Announcements= mongoose.model("Announcements", announcementsSchema);
+}
+
+
+const models = { User, Society, Registry, Event, Complaint, Utility, Announcements };
 export default models;

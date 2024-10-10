@@ -8,7 +8,7 @@ export async function POST(req) {
     try {
         await connectdb();
 
-        const { firstname, lastname, email, password } = await req.json();
+        const { firstname, lastname, email, password, name } = await req.json();
         console.log("req.body: ", firstname);
 
         const exists = await User.findOne({email});
@@ -26,8 +26,10 @@ export async function POST(req) {
             firstname,
             lastname,
             email,
+            name,
             password: hashedPassword
         })
+        console.log("newUser: ", newUser);
 
         return NextResponse.json({message: "successfully registered", status: 200});
     } catch (error) {

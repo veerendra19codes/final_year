@@ -126,7 +126,9 @@ const NewSociety = () => {
                                 <CldUploadWidget uploadPreset="test12" onSuccess={({ info, event }) => {
                                     console.log("event: ", event);
                                     console.log("info: ", info);
+
                                     if (event === "success") {
+                                        // info.public_id 
                                         setPublicId(info.public_id);
                                         alert("image uploaded")
                                     }

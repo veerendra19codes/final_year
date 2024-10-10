@@ -2,45 +2,23 @@ import { connectdb } from "@/lib/db";
 import models from "@/lib/models";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(req) {
-  try {
-    const { societyId } = await req.json(); 
-    await connectdb();
-    const events = await models.Event.find({ society: societyId }); 
-    return NextResponse.json({ data: events }); 
-  } catch (error) {
-    console.error(error);
-    return NextResponse.json({ message: "Failed to fetch events" }, { status: 500 });
-  }
-}
-
 // Add new events to the society, only can be done by committee member or secretary
 export async function POST(req) {
   await connectdb();
   try {
-    const { title,
-        description,
-        image,
-        fromTime,
-        toTime,
-        society,
-        societyId } = await req.json();
-    const timings = `${fromTime} ${toTime}`;
+    const {title, content, society, societyId, secretary } = await req.json();
     
-    const newEvent = await models.Event.create({
-      eventname:title,
-      description,
-      timings,
-      date,
-      society,
-      societyId
-    });
-    console.log("new Event: ", newEvent);
+    console.log({title, content, society, societyId, secretary});
 
-    return NextResponse.json({ success: true, data: newEvent }, { status: 201 });
+    const newAnnouncement = await  models.Announcements.create({
+      title, content, society, societyId, secretary
+    });
+    console.log("newAnnoucement: ", newAnnouncement);
+
+    return NextResponse.json({ success: true, data: newAnnouncement }, { status: 201 });
   } catch (error) {
     console.error(error);
-    return NextResponse.json({ message: "Failed to create event" }, { status: 500 });
+        return NextResponse.json({ message: "Failed to create event" }, { status: 500 });
   }
 }
 

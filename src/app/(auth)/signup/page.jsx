@@ -28,14 +28,19 @@ export default function Signup() {
 
     const handleRegister = async (e) => {
         e.preventDefault();
+
         try {
             console.log("firsname: ", firstname);
+            const name = `${firstname} ${lastname}`;
+            console.log("name: ", name);
+
             const res = await fetch("/api/signup", {
                 method: "POST",
                 body: JSON.stringify({
                     firstname,
                     lastname,
                     email,
+                    name,
                     password
                 })
             })
@@ -56,7 +61,7 @@ export default function Signup() {
     }
 
     return (
-        <div className="min-h-screen bg-black flex justify-center items-center">
+        <div className="min-h-screen bg-white flex justify-center items-center shadow-2xl">
             <div className=" flex w-[80%] h-[80%] bg-blue-500 justify-center items-center rounded-2xl ">
 
                 <div className='bg-blue-500 w-[50%] h-full'>
@@ -65,7 +70,7 @@ export default function Signup() {
                 <div className='flex bg-gray-100 w-[50%] items-center justify-center rounded-r-xl py-8'>
 
                     {/* form */}
-                    <div className=' flex flex-col items-center justify-center p-4 gap-4  w-[80%]' >
+                    <form className=' flex flex-col items-center justify-center p-4 gap-4  w-[80%]' onSubmit={handleRegister}>
                         <div className='flex flex-col justify-center items-center'>
                             <div className='font-semibold text-2xl'>
                                 REGISTER
@@ -150,7 +155,7 @@ export default function Signup() {
                                 </AlertDescription>
                             </Alert>
                         }
-                    </div>
+                    </form>
                 </div>
 
             </div>
