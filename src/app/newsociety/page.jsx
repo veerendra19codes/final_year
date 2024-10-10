@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'next/image'
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
@@ -27,6 +27,7 @@ const NewSociety = () => {
     const [publicId, setPublicId] = useState("");
     const [error, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+    const [user, setUser] = useState({});
 
     const reset = () => {
         setName("");
@@ -36,7 +37,9 @@ const NewSociety = () => {
     }
     const handleRegister = async () => {
         try {
-            console.log("name: ", name);
+            const secretary = `${user.firstname} ${user.lastname}`;
+            console.log("secretary: ", secretary);
+
             const res = await axios({
                 url: "/api/newsociety",
                 data: {
@@ -44,7 +47,7 @@ const NewSociety = () => {
                     address,
                     password,
                     publicId,
-                    secretary: session.data?.user?.id
+                    secretary
                 },
                 method: "POST"
             })
@@ -57,10 +60,35 @@ const NewSociety = () => {
         }
     }
 
+    useEffect(() => {
+        const fetchUserById = async () => {
+            try {
+                const res = await fetch("/api/getuserbyid", {
+                    method: "POST",
+                    body: JSON.stringify({ id: session.data.user.id }),
+                    headers: {
+                        "Content-type": "application/json"
+                    }
+                })
+                // console.log('res', res);
+                const data = await res.json();
+                // console.log("data: ", data);
+                setUser(data.user);
+
+            } catch (error) {
+                console.log("error in fetching user by id: ", error);
+            }
+        }
+        { session?.data?.user?.id && fetchUserById() }
+    }, [session?.data?.user?.id]);
+
+    useEffect(() => {
+        console.log("user in useEffect: ", user);
+    }, [user])
 
     return (
-        <div className="min-h-screen bg-black flex justify-center items-center">
-            {session.data?.user &&
+        <div className="min-h-screen  flex justify-center items-center">
+            {(session.data?.user && user) ?
                 <div className=" flex w-[80%] h-[80%] bg-blue-500 justify-center items-center rounded-2xl ">
 
                     <div className='bg-blue-500 w-[50%] h-full'>
@@ -148,7 +176,7 @@ const NewSociety = () => {
                                 <Button className="bg-blue-500 hover:bg-blue-400" onClick={handleRegister}>Register now</Button>
                             </div>
 
-                            <div className="text-gray-500">Already a society member? <Link href="/joinsociety" className="text-blue-500 underline hover:text-blue-400">Join a society</Link> </div>
+                            <div className="text-gray-500">Already a society member? <Link href="/societies" className="text-blue-500 underline hover:text-blue-400">Join a society</Link> </div>
 
                             {error &&
                                 <Alert variant="destructive">
@@ -162,6 +190,15 @@ const NewSociety = () => {
                         </div>
                     </div>
 
+                </div>
+                :
+                <div className="border-[1px] border-red-500 rounded-xl mt-16 p-4 text-start">
+                    You need to login before listing your society
+                    <br>
+                    </br>
+                    <Link href={"/login"} className="text-blue-500 hover:text-blue-300 underline">
+                        Click here to login
+                    </Link>
                 </div>
             }
         </div>

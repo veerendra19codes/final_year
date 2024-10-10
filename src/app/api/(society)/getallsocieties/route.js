@@ -13,7 +13,7 @@ export async function GET(req) {
         return NextResponse.json({message: "success", socs})
     } catch (error) {
 
-        console.log("error in registering a new soc: ", error);
-        return NextResponse.json({message: "error in adding new society"})
+        console.log("error in getting all socs: ", error);
+        return NextResponse.json({message: "error in getting all socs"})
     }
 }

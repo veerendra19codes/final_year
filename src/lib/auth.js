@@ -1,6 +1,7 @@
 import CredentialsProvider from 'next-auth/providers/credentials';
 import models from "@/lib/models";
 import { NextResponse } from 'next/server';
+import { connectdb } from './db';
 const User = models.User;
 
 export const NEXT_AUTH_CONFIG = {
@@ -14,6 +15,7 @@ export const NEXT_AUTH_CONFIG = {
           async authorize(credentials) {
 
               try {
+                await connectdb();
                 console.log("credentials:", credentials);
 
                 // //check this credentials exist in the db or not and send null if not and send user details in session if exists
@@ -26,17 +28,13 @@ export const NEXT_AUTH_CONFIG = {
 
                 return {
                     id: exists._id,
-                    email: credentials.email,
-                    firstname: credentials.firstname,
-                    lastname: credentials.lastname
+                    email: credentials.email
                 };
               } catch (error) {
                 console.log("error in login: ", error);
                 return {
                   id: exists._id,
-                  email: credentials.email,
-                  firstname: credentials.firstname,
-                  lastname: credentials.lastname
+                  email: credentials.email
                 };
               }
               
@@ -48,16 +46,12 @@ export const NEXT_AUTH_CONFIG = {
         jwt: async ({ user, token }) => {
         if (user) {
             token.uid = user.id;
-            token.firstname = user.firstname,
-            token.lastname = user.lastname
         }
         return token;
         },
       session: ({ session, token, user }) => {
           if (session.user) {
-              session.user.id = token.uid,
-              session.firstname = token.firstname,
-              session.lastname = token.lastname
+              session.user.id = token.uid
           }
           return session
       }
