@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar/Navbar";
 import { Providers } from "@/providers";
 import Sidebar from "@/components/sidebar/sidebar";
+import Chatbot from "@/components/Chatbot/Chatbot";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -32,6 +33,7 @@ export default function RootLayout({ children }) {
             <main className="flex-1 overflow-auto">
               {children}
             </main>
+            <Chatbot />
           </div>
         </Providers>
       </body>

@@ -1,3 +1,6 @@
+"use client";
+
+import { CldImage } from "next-cloudinary";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -20,8 +23,14 @@ export default function Home() {
           </div>
 
         </div>
-        <div className="right w-1/2 flex justify-center items-center">
-          <Image src="/hero2.jpeg" height={100} width={100} className="w-[500px] h-[400px] rounded-xl" alt="hero" />
+        <div className="right w-1/2 flex justify-center items-center pr-16">
+          <CldImage
+                                width="600"
+                                height="500"
+                                src="sdzvp6dzezdcjgslyszn"
+                                sizes="100vw"
+                                alt="image"
+                            />
         </div>
       </div>
     </div>

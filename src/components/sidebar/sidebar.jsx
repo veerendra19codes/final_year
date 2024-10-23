@@ -13,7 +13,11 @@ import {
     Calendar,
     User,
     MapPin,
-    Wrench
+    Wrench,
+    Mail,
+    Laptop,
+    MessageCircleWarning,
+    IndianRupee
 } from 'lucide-react'
 import Link from 'next/link'
 import { signIn, signOut, useSession } from 'next-auth/react'
@@ -26,13 +30,20 @@ const menuItems = [
     { name: 'Events', icon: Calendar, path: "/events" },
     { name: 'Profile', icon: User, path: "/profile" },
     { name: 'Neighbourhood', icon: MapPin, path: "/neighbourhood" },
-    { name: 'Services', icon: Wrench, path: "/services" },
+    { name: 'Utilities', icon: Wrench, path: "/utilities" },
+    { name: 'Letter', icon: Mail, path: "/letters" },
+    // { name: 'Meetings', icon: Laptop, path: "/meetings" },
+    { name: "Discussions", icon: MessageCircleWarning, path: "/discussion" },
+    { name: "Budget", icon: IndianRupee, path: "/budget" }
 ]
 
 export default function Sidebar() {
     const [isOpen, setIsOpen] = useState(true)
 
     const session = useSession();
+    // useEffect(() => {
+    //     if(session.data?.user?.role == "guest")
+    // })
     return (
         <div className={cn(
             "flex flex-col h-screen bg-blue-700 text-white transition-all duration-300 ease-in-out",

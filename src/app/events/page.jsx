@@ -160,83 +160,85 @@ export default function EventsPage() {
                                 className="pl-8"
                             />
                         </div>
-                        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-                            <DialogTrigger asChild>
-                                <Button>
-                                    <PlusIcon className="mr-2 h-4 w-4" /> Add New Event
-                                </Button>
-                            </DialogTrigger>
-                            <DialogContent className="sm:max-w-[425px] bg-white">
-                                <DialogHeader>
-                                    <DialogTitle>Add New Event</DialogTitle>
-                                    <DialogDescription>
-                                        Fill in the details for the new event. Click save when you&apos;re done.
-                                    </DialogDescription>
-                                </DialogHeader>
-                                <div className="grid gap-4 py-4">
-                                    <div className="grid grid-cols-4 items-center gap-4">
-                                        <label htmlFor="title" className="text-right">
-                                            Title
-                                        </label>
-                                        <Input
-                                            id="title"
-                                            value={newEvent.title}
-                                            onChange={(e) => setNewEvent({ ...newEvent, title: e.target.value })}
-                                            className="col-span-3"
-                                        />
+                        {session?.data?.user?.role == "secretary" &&
+                            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                                <DialogTrigger asChild>
+                                    <Button>
+                                        <PlusIcon className="mr-2 h-4 w-4" /> Add New Event
+                                    </Button>
+                                </DialogTrigger>
+                                <DialogContent className="sm:max-w-[425px] bg-white">
+                                    <DialogHeader>
+                                        <DialogTitle>Add New Event</DialogTitle>
+                                        <DialogDescription>
+                                            Fill in the details for the new event. Click save when you&apos;re done.
+                                        </DialogDescription>
+                                    </DialogHeader>
+                                    <div className="grid gap-4 py-4">
+                                        <div className="grid grid-cols-4 items-center gap-4">
+                                            <label htmlFor="title" className="text-right">
+                                                Title
+                                            </label>
+                                            <Input
+                                                id="title"
+                                                value={newEvent.title}
+                                                onChange={(e) => setNewEvent({ ...newEvent, title: e.target.value })}
+                                                className="col-span-3"
+                                            />
+                                        </div>
+                                        <div className="grid grid-cols-4 items-center gap-4">
+                                            <label htmlFor="description" className="text-right">
+                                                Description
+                                            </label>
+                                            <Textarea
+                                                id="description"
+                                                value={newEvent.description}
+                                                onChange={(e) => setNewEvent({ ...newEvent, description: e.target.value })}
+                                                className="col-span-3"
+                                            />
+                                        </div>
+                                        <div className="grid grid-cols-4 items-center gap-4">
+                                            <label htmlFor="image" className="text-right">
+                                                Image URL
+                                            </label>
+                                            <Input
+                                                id="image"
+                                                value={newEvent.image}
+                                                onChange={(e) => setNewEvent({ ...newEvent, image: e.target.value })}
+                                                className="col-span-3"
+                                            />
+                                        </div>
+                                        <div className="grid grid-cols-4 items-center gap-4">
+                                            <label htmlFor="fromTime" className="text-right">
+                                                From
+                                            </label>
+                                            <Input
+                                                id="fromTime"
+                                                type="datetime-local"
+                                                value={newEvent.fromTime}
+                                                onChange={(e) => setNewEvent({ ...newEvent, fromTime: e.target.value })}
+                                                className="col-span-3"
+                                            />
+                                        </div>
+                                        <div className="grid grid-cols-4 items-center gap-4">
+                                            <label htmlFor="toTime" className="text-right">
+                                                To
+                                            </label>
+                                            <Input
+                                                id="toTime"
+                                                type="datetime-local"
+                                                value={newEvent.toTime}
+                                                onChange={(e) => setNewEvent({ ...newEvent, toTime: e.target.value })}
+                                                className="col-span-3"
+                                            />
+                                        </div>
                                     </div>
-                                    <div className="grid grid-cols-4 items-center gap-4">
-                                        <label htmlFor="description" className="text-right">
-                                            Description
-                                        </label>
-                                        <Textarea
-                                            id="description"
-                                            value={newEvent.description}
-                                            onChange={(e) => setNewEvent({ ...newEvent, description: e.target.value })}
-                                            className="col-span-3"
-                                        />
-                                    </div>
-                                    <div className="grid grid-cols-4 items-center gap-4">
-                                        <label htmlFor="image" className="text-right">
-                                            Image URL
-                                        </label>
-                                        <Input
-                                            id="image"
-                                            value={newEvent.image}
-                                            onChange={(e) => setNewEvent({ ...newEvent, image: e.target.value })}
-                                            className="col-span-3"
-                                        />
-                                    </div>
-                                    <div className="grid grid-cols-4 items-center gap-4">
-                                        <label htmlFor="fromTime" className="text-right">
-                                            From
-                                        </label>
-                                        <Input
-                                            id="fromTime"
-                                            type="datetime-local"
-                                            value={newEvent.fromTime}
-                                            onChange={(e) => setNewEvent({ ...newEvent, fromTime: e.target.value })}
-                                            className="col-span-3"
-                                        />
-                                    </div>
-                                    <div className="grid grid-cols-4 items-center gap-4">
-                                        <label htmlFor="toTime" className="text-right">
-                                            To
-                                        </label>
-                                        <Input
-                                            id="toTime"
-                                            type="datetime-local"
-                                            value={newEvent.toTime}
-                                            onChange={(e) => setNewEvent({ ...newEvent, toTime: e.target.value })}
-                                            className="col-span-3"
-                                        />
-                                    </div>
-                                </div>
-                                <DialogFooter>
-                                    <Button type="submit" onClick={handleAddEvent}>Save event</Button>
-                                </DialogFooter>
-                            </DialogContent>
-                        </Dialog>
+                                    <DialogFooter>
+                                        <Button type="submit" onClick={handleAddEvent}>Save event</Button>
+                                    </DialogFooter>
+                                </DialogContent>
+                            </Dialog>
+                        }
                     </div>
 
                     <div className="space-y-4">
@@ -258,14 +260,16 @@ export default function EventsPage() {
                                                         </div>
                                                     </CardDescription>
                                                 </div>
-                                                <div className="flex space-x-2">
-                                                    <Button variant="outline" size="icon" onClick={() => handleEditEvent(event.id)}>
-                                                        <EditIcon className="h-4 w-4" />
-                                                    </Button>
-                                                    <Button variant="outline" size="icon" onClick={() => handleDeleteEvent(event.id)}>
-                                                        <TrashIcon className="h-4 w-4" />
-                                                    </Button>
-                                                </div>
+                                                {session?.data?.user?.role == "secretary" &&
+                                                    <div className="flex space-x-2">
+                                                        <Button variant="outline" size="icon" onClick={() => handleEditEvent(event.id)}>
+                                                            <EditIcon className="h-4 w-4" />
+                                                        </Button>
+                                                        <Button variant="outline" size="icon" onClick={() => handleDeleteEvent(event.id)}>
+                                                            <TrashIcon className="h-4 w-4" />
+                                                        </Button>
+                                                    </div>
+                                                }
                                             </div>
                                         </CardHeader>
                                         <CardContent>

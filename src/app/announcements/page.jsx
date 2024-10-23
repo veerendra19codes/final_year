@@ -195,46 +195,48 @@ export default function AnnouncementsPage() {
                                 onChange={handleSearch}
                                 className="w-full sm:w-64"
                             />
-                            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen} className="bg-white">
-                                <DialogTrigger asChild>
-                                    <Button onClick={() => { setIsEditing(false); setNewAnnouncement({ id: null, title: '', content: '' }) }}>
-                                        <Plus className="mr-2 h-4 w-4" /> New Announcement
-                                    </Button>
-                                </DialogTrigger>
-                                <DialogContent className="sm:max-w-[425px] bg-white">
-                                    <DialogHeader>
-                                        <DialogTitle>{isEditing ? 'Edit Announcement' : 'Add New Announcement'}</DialogTitle>
-                                    </DialogHeader>
-                                    <form onSubmit={handleSubmitAnnouncement} className="space-y-4 bg-white">
-                                        <div className="space-y-2">
-                                            <Label htmlFor="title">Title</Label>
-                                            <Input
-                                                id="title"
-                                                name="title"
-                                                value={newAnnouncement.title}
-                                                onChange={handleAnnouncementChange}
-                                                required
-                                            />
-                                        </div>
-                                        <div className="space-y-2">
-                                            <Label htmlFor="content">Content</Label>
-                                            <Textarea
-                                                id="content"
-                                                name="content"
-                                                value={newAnnouncement.content}
-                                                onChange={handleAnnouncementChange}
-                                                required
-                                            />
-                                        </div>
-                                        <div className="flex justify-end space-x-2">
-                                            <Button type="button" variant="outline" onClick={resetAnnouncementForm}>
-                                                Cancel
-                                            </Button>
-                                            <Button type="submit">{isEditing ? 'Update' : 'Add'} Announcement</Button>
-                                        </div>
-                                    </form>
-                                </DialogContent>
-                            </Dialog>
+                            {session?.data?.user?.role == "secretary" &&
+                                <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen} className="bg-white">
+                                    <DialogTrigger asChild>
+                                        <Button onClick={() => { setIsEditing(false); setNewAnnouncement({ id: null, title: '', content: '' }) }}>
+                                            <Plus className="mr-2 h-4 w-4" /> New Announcement
+                                        </Button>
+                                    </DialogTrigger>
+                                    <DialogContent className="sm:max-w-[425px] bg-white">
+                                        <DialogHeader>
+                                            <DialogTitle>{isEditing ? 'Edit Announcement' : 'Add New Announcement'}</DialogTitle>
+                                        </DialogHeader>
+                                        <form onSubmit={handleSubmitAnnouncement} className="space-y-4 bg-white">
+                                            <div className="space-y-2">
+                                                <Label htmlFor="title">Title</Label>
+                                                <Input
+                                                    id="title"
+                                                    name="title"
+                                                    value={newAnnouncement.title}
+                                                    onChange={handleAnnouncementChange}
+                                                    required
+                                                />
+                                            </div>
+                                            <div className="space-y-2">
+                                                <Label htmlFor="content">Content</Label>
+                                                <Textarea
+                                                    id="content"
+                                                    name="content"
+                                                    value={newAnnouncement.content}
+                                                    onChange={handleAnnouncementChange}
+                                                    required
+                                                />
+                                            </div>
+                                            <div className="flex justify-end space-x-2">
+                                                <Button type="button" variant="outline" onClick={resetAnnouncementForm}>
+                                                    Cancel
+                                                </Button>
+                                                <Button type="submit">{isEditing ? 'Update' : 'Add'} Announcement</Button>
+                                            </div>
+                                        </form>
+                                    </DialogContent>
+                                </Dialog>
+                            }
                         </div>
                     </div>
 
@@ -243,14 +245,16 @@ export default function AnnouncementsPage() {
                             <Card key={announcement.id} className="w-full">
                                 <CardHeader className="flex flex-row items-center justify-between space-y-0">
                                     <CardTitle>{announcement.title}</CardTitle>
-                                    <div className="flex space-x-2">
-                                        <Button variant="outline" size="icon" onClick={() => handleEdit(announcement)}>
-                                            <Edit className="h-4 w-4" />
-                                        </Button>
-                                        <Button variant="outline" size="icon" onClick={() => handleDelete(announcement.id)}>
-                                            <Trash2 className="h-4 w-4" />
-                                        </Button>
-                                    </div>
+                                    {session?.data?.user?.role == "secretary" &&
+                                        <div className="flex space-x-2">
+                                            <Button variant="outline" size="icon" onClick={() => handleEdit(announcement)}>
+                                                <Edit className="h-4 w-4" />
+                                            </Button>
+                                            <Button variant="outline" size="icon" onClick={() => handleDelete(announcement.id)}>
+                                                <Trash2 className="h-4 w-4" />
+                                            </Button>
+                                        </div>
+                                    }
                                 </CardHeader>
                                 <CardContent>
                                     <p>{announcement.content}</p>

@@ -21,10 +21,11 @@ export async function POST(req){
         console.log("Andhar tho aya");
        const body=await req.json();
        console.log("body tho ari hia",body);
-       const newUtility=new models.Utility(body);
+       const newUtility=await models.Utility.create({
+        
+       });
        console.log("New Utility: ", newUtility);
        console.log(newUtility)
-       await newUtility.save();
        console.log("New utility added successfully")
        return NextResponse.json(newUtility);
     

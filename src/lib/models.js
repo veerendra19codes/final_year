@@ -38,8 +38,8 @@ const userSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        enum: ["watchman", "secretary", "member", "committeeMember"],
-        default: "member", 
+        enum: ["watchman", "secretary", "member", "committeeMember", "guest"],
+        default: "guest", 
         required: true,
     },
     maintenanceAmount: {
@@ -185,13 +185,13 @@ const utilitySchema = new mongoose.Schema({
     review:[
         {
         type:String,
-        required: true,
+        // required: true,
         trim: true,
         }
     ],
     image:{
         type: String,
-        required: true,
+        // required: true,
         trim: true,
     },
     utilityType: {
@@ -204,10 +204,13 @@ const utilitySchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
-    society: {
+    societyId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Society", 
         required: true,
+    },
+    society: {
+        type: String
     }
 }, {timestamps: true});
 
