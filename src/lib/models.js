@@ -55,7 +55,7 @@ const userSchema = new mongoose.Schema({
         type: Date, 
         default: null, 
     },
-     society: {
+    society: {
         type: String,
         trim: true,
     },
@@ -78,7 +78,7 @@ const societySchema = new mongoose.Schema({
         required: true,
         trim: true,
     },
-    image_public_id: {
+    image: {
         type: String,
         unique: true,
         trim: true,
@@ -98,8 +98,83 @@ const societySchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "User",
         }
-    ]
+    ],
+    inviteLink: {
+        type: String,
+        trim: true,
+    },
+    role: {
+        type: String,
+        trim: true,
+    }
 }, {timestamps: true});
+
+
+// New Complaint schema
+const complaintSchema = new mongoose.Schema({
+    title: {
+        type: String,
+        required: true,
+        trim: true,
+    },
+    description: {
+        type: String,
+        trim: true,
+    },
+    dateAdded: {
+        type: Date,
+        default: Date.now, // Automatically set to the current date and time
+        required: true,
+    },
+    author: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User", // Reference to the User model
+        required: true,
+    },
+    societyId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Society", // Reference to the Society model
+        required: true,
+    },
+    status: {
+        type: String,
+        enum: ["pending", "resolved"],
+        default: "pending", // Complaint status (pending or resolved)
+    }
+}, { timestamps: true });
+
+const announcementsSchema = new mongoose.Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    content: {
+      type: String,
+      // required: true,
+      trim: true,
+    },
+    date: {
+      type: Date,
+      required: true,
+      default: Date.now,
+    },
+    society: {
+      type: String,
+    },
+    societyId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Society",
+      required: true,
+    },
+    secretary: {
+      type: String,
+    },
+  },
+  { timestamps: true }
+);
+
 
 // Existing Registry schema
 const registrySchema = new mongoose.Schema({
@@ -194,6 +269,50 @@ const utilitySchema = new mongoose.Schema({
         // required: true,
         trim: true,
     },
+    
+    phoneNumber: {
+        type: String,
+        required: true,
+        trim: true,
+    },
+    societyId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Society", 
+        required: true,
+    },
+    society: {
+        type: String
+    }
+}, {timestamps: true});
+
+
+const budgetSchema = new mongoose.Schema({
+    name:{
+        type: String,
+        required: true,
+        trim: true,
+    },
+    description: {
+        type: String,
+        required: true,
+        trim: true,
+    },
+    rating:{
+        type: String,
+        default: 0,
+    },
+    review:[
+        {
+        type:String,
+        // required: true,
+        trim: true,
+        }
+    ],
+    image:{
+        type: String,
+        // required: true,
+        trim: true,
+    },
     utilityType: {
         type: String,
         required: true,
@@ -213,65 +332,6 @@ const utilitySchema = new mongoose.Schema({
         type: String
     }
 }, {timestamps: true});
-
-// New Complaint schema
-const complaintSchema = new mongoose.Schema({
-    description: {
-        type: String,
-        required: true,
-        trim: true,
-    },
-    dateAdded: {
-        type: Date,
-        default: Date.now, // Automatically set to the current date and time
-        required: true,
-    },
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User", // Reference to the User model
-        required: true,
-    },
-    society: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Society", // Reference to the Society model
-        required: true,
-    },
-    status: {
-        type: String,
-        enum: ["pending", "resolved"],
-        default: "pending", // Complaint status (pending or resolved)
-    }
-}, { timestamps: true });
-
-const announcementsSchema = new mongoose.Schema({
-    title: {
-        type: String,
-        required: true,
-        trim: true,
-    },
-    content: {
-        type: String,
-        // required: true,
-        trim: true,
-    },
-    date: {
-        type: Date,
-        required: true,
-        default: Date.now,
-    },
-    society: {
-        type: String,
-    },  
-    societyId: {
-type: mongoose.Schema.Types.ObjectId,
-        ref: "Society",
-        required: true,
-    },
-    secretary: {
-        type: String
-    }
-}, { timestamps: true });
-
 
 
 try {

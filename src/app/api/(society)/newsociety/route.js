@@ -7,7 +7,9 @@ const User = models.User;
 export async function POST(req) {
     try {
         await connectdb();
-        const { name, address, secretary, password, publicId}  = await req.json();
+        const { name, address, secretary, password, image, inviteLink}  = await req.json();
+        // const data = await req.json();
+        // console.log("body:", data);
 
         const exists = await Society.findOne({name});
         
@@ -21,22 +23,23 @@ export async function POST(req) {
             address,
             password,
             secretary,
-            image_public_id: publicId,
+            image,
+            inviteLink,
         })
         console.log("newsoc:", newsoc);
 
-        const updatedUser = await User.findOneAndUpdate({name: secretary}, {
+        const updatedUser = await User.findOneAndUpdate({email: secretary}, {
             $set: {
                 society: newsoc.name,
                 societyId: newsoc.id,
+                role: "secretary"
             }
         })
 
 
         console.log("updatedUser: ", updatedUser);
-        return NextResponse.json({message: "success"})
+        return NextResponse.json({message: "success", data:newsoc})
     } catch (error) {
-
         console.log("error in registering a new soc: ", error);
         return NextResponse.json({message: "error in adding new society"})
     }

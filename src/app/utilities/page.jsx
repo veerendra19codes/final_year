@@ -27,7 +27,7 @@ function UtilityCard({ utility, openReview }) {
       <div className="px-6 py-4">
         <div className="font-bold text-xl mb-2">{utility.name}</div>
         <p className="text-gray-700 text-base mb-2">{utility.description}</p>
-        <div className="flex items-center mb-2">
+       {/* <div className="flex items-center mb-2">
           <Star className="h-5 w-5 text-yellow-500 mr-1" />
           <span className="text-gray-700">
             {utility?.rating ? parseFloat(utility.rating).toFixed(1) : 'N/A'}
@@ -38,11 +38,11 @@ function UtilityCard({ utility, openReview }) {
           className="text-blue-500 hover:underline mb-2"
         >
           {utility?.reviews?.length} Reviews
-        </button>
-        <p className="text-gray-600 mb-2 flex items-center">
+        </button> */}
+        {/* <p className="text-gray-600 mb-2 flex items-center">
           <MapPin className="h-4 w-4 mr-1" />
           {utility.utilityType}
-        </p>
+        </p> */}
         <div className="flex items-center">
           <Phone className="h-5 w-5 text-gray-500 mr-2" />
           <span className="text-gray-700">{utility.phoneNumber}</span>
@@ -64,7 +64,7 @@ export default function UtilityDashboard() {
   const [newUtility, setNewUtility] = useState({
     name: "",
     description: "",
-    utilityType: "",
+    // utilityType: "",
     phoneNumber: "",
     society: "",
   })
@@ -74,9 +74,15 @@ export default function UtilityDashboard() {
   useEffect(() => {
     const fetchUtlilities = async () => {
       try {
-        const response = await fetch('/api/utility', {
-          method: 'GET',
-        })
+        const response = await fetch("/api/utility", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            societyId: user.societyId,
+          }),
+        });
         const data = await response.json();
         setUtilitiesData(data)
 
@@ -85,7 +91,7 @@ export default function UtilityDashboard() {
       }
     }
     fetchUtlilities();
-  }, []);
+  }, [user.societyId]);
   const openReview = (review, utilityName) => {
     setSelectedReview(review)
     setSelectedUtilityName(utilityName)
@@ -105,7 +111,7 @@ export default function UtilityDashboard() {
     setNewUtility({
       name: "",
       description: "",
-      utilityType: "",
+      // utilityType: "",
       phoneNumber: "",
     })
   }
@@ -129,7 +135,7 @@ export default function UtilityDashboard() {
 
     try {
       // Send a POST request to add the new utility
-
+      console.log("utilityToAdd:", utilityToAdd);
       const response = await fetch('/api/utility', {
         method: 'POST',
         headers: {
@@ -197,9 +203,13 @@ export default function UtilityDashboard() {
           </button>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {utilitiesData.map((utility) => (
+          {utilitiesData?.length > 0 ? 
+          utilitiesData?.map((utility) => (
             <UtilityCard key={utility.id} utility={utility} openReview={openReview} />
-          ))}
+          ))
+          : 
+          <p>No Utilties</p>
+        }
         </div>
       </div>
 
@@ -266,28 +276,16 @@ export default function UtilityDashboard() {
                     required
                   />
                 </div>
-                <div className="mb-4">
-                  <label htmlFor="utilityType" className="block text-gray-700 text-sm font-bold mb-2">
-                    Utility Type
-                  </label>
-                  <input
-                    type="text"
-                    id="utilityType"
-                    name="utilityType"
-                    value={newUtility.utilityType}
-                    onChange={handleInputChange}
-                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    required
-                  />
-                </div>
+                
                 <div className="mb-4">
                   <label htmlFor="phoneNumber" className="block text-gray-700 text-sm font-bold mb-2">
                     Phone Number
                   </label>
                   <input
-                    type="tel"
+                    type="number"
                     id="phoneNumber"
                     name="phoneNumber"
+                    
                     value={newUtility.phoneNumber}
                     onChange={handleInputChange}
                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"

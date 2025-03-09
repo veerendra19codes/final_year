@@ -3,8 +3,11 @@
 import { CldImage } from "next-cloudinary";
 import Image from "next/image";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
+
 
 export default function Home() {
+  const session = useSession();
   return (
     <div className="w-full flex flex-col">
       <div className="hero flex w-full justify-center items-center min-h-screen">
@@ -19,18 +22,15 @@ export default function Home() {
           <div className="flex gap-4 justify-center items-start">
 
             <Link href="/societies" className="rounded-3xl px-8 py-2 bg-blue-500 text-white"> + Join a society</Link>
-            <Link href="/newsociety" className="rounded-3xl px-8 py-2 bg-blue-500 text-white">Create a society profile</Link>
+            {session.status == "authenticated" ? <Link href="/announcements" className="rounded-3xl px-8 py-2 bg-blue-500 text-white">See Latest News</Link> :
+            <Link href="/login" className="rounded-3xl px-8 py-2 bg-blue-500 text-white">Login</Link>}
+
           </div>
 
         </div>
         <div className="right w-1/2 flex justify-center items-center pr-16">
-          <CldImage
-                                width="600"
-                                height="500"
-                                src="sdzvp6dzezdcjgslyszn"
-                                sizes="100vw"
-                                alt="image"
-                            />
+          
+          <Image  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ1Rir8ybNMt274CJL1QsmO8NtEpBMNMlu9Bw&s"  alt="hero" width={900} height={900} className="object-cover w-[500px] h-[350px] rounded-xl" />
         </div>
       </div>
     </div>

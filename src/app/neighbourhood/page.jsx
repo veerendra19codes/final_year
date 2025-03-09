@@ -29,7 +29,7 @@ const Neighbourhood = () => {
       <h1 className="text-3xl font-bold mb-6">Neighbourhood</h1>
 
       {/* Police Station Section */}
-      <section className="mb-8">
+      <section className="mb-8 w-[80%] mx-auto">
         <h2 className="text-xl font-bold mb-4">Nearby Police Stations</h2>
         <div className="border rounded-lg p-4 shadow-md">
           <GoogleMapComponent
@@ -41,7 +41,7 @@ const Neighbourhood = () => {
       </section>
 
       {/* Hospital Section */}
-      <section className="mb-8">
+      <section className="mb-8 w-[80%] mx-auto">
         <h2 className="text-xl font-bold mb-4">Nearby Hospitals</h2>
         <div className="border rounded-lg p-4 shadow-md">
           <GoogleMapComponent
@@ -53,7 +53,7 @@ const Neighbourhood = () => {
       </section>
 
       {/* Metro Station Section */}
-      <section className="mb-8">
+      <section className="mb-8 w-[80%] mx-auto">
         <h2 className="text-xl font-bold mb-4">Nearby Metro Stations</h2>
         <div className="border rounded-lg p-4 shadow-md">
           <GoogleMapComponent

@@ -1,14 +1,14 @@
 import { connectdb } from "@/lib/db";
 import models from "@/lib/models";
 import { NextRequest, NextResponse } from "next/server";
-export async function GET(req){
+export async function PUT(req){
     //this function will return me back all the utilities
     await connectdb();
     try{
-
-        const utilities=await models.Utility.find();
-        console.log("i got things")
-        console.log(utilities)
+        const { societyId } = await req.json();
+        console.log("societyId:", societyId);
+        const utilities=await models.Utility.find({ societyId});
+        console.log("utilities:",utilities)
         return NextResponse.json(utilities); 
     }catch(err){
         console.log("Error in getting utilities: ", err);
@@ -20,9 +20,24 @@ export async function POST(req){
     await connectdb();
         console.log("Andhar tho aya");
        const body=await req.json();
+       const {
+            name,
+            description,
+            phoneNumber,
+            society,
+            societyId,
+            reviews,
+            rating
+       } = body;
        console.log("body tho ari hia",body);
        const newUtility=await models.Utility.create({
-        
+            name,
+            description,
+            phoneNumber,
+            society,
+            societyId,
+            reviews,
+            rating,
        });
        console.log("New Utility: ", newUtility);
        console.log(newUtility)

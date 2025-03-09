@@ -1,5 +1,6 @@
-'use client';
-import React, { useState } from 'react';
+"use client";
+
+import { useState } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -7,37 +8,37 @@ const letterFormats = [
   {
     title: "Additional Car Parking Permission",
     format: "Dear Secretary,\n\nI am writing to request permission for an additional car parking space. [Your reason here]\n\nThank you for your consideration.\n\nSincerely,\n[Your Name]",
-    color: "bg-blue-500"
+    color: "bg-gray-800"
   },
   {
     title: "Home Renovation Permission",
     format: "Dear Secretary,\n\nI am writing to seek permission for home renovation. [Details of renovation]\n\nThank you for your attention to this matter.\n\nBest regards,\n[Your Name]",
-    color: "bg-green-500"
+    color: "bg-gray-800"
   },
   {
     title: "Guest Stay Permission",
     format: "Dear Secretary,\n\nI would like to request permission for a guest to stay at my residence. [Guest details and duration]\n\nThank you for your understanding.\n\nKind regards,\n[Your Name]",
-    color: "bg-yellow-500"
+    color: "bg-gray-800"
   },
   {
     title: "Event Hosting Permission",
     format: "Dear Secretary,\n\nI am writing to request permission to host an event in the society premises. [Event details]\n\nThank you for your cooperation.\n\nSincerely,\n[Your Name]",
-    color: "bg-purple-500"
+    color: "bg-gray-800"
   },
   {
     title: "Pet Ownership Permission",
     format: "Dear Secretary,\n\nI am writing to seek permission to keep a pet in my residence. [Pet details]\n\nThank you for your consideration.\n\nBest wishes,\n[Your Name]",
-    color: "bg-pink-500"
+    color: "bg-gray-800"
   },
   {
     title: "Satellite Dish Installation Permission",
     format: "Dear Secretary,\n\nI would like to request permission to install a satellite dish. [Installation details]\n\nThank you for your attention to this request.\n\nSincerely,\n[Your Name]",
-    color: "bg-indigo-500"
+    color: "bg-gray-800"
   },
   {
     title: "Business From Home Permission",
     format: "Dear Secretary,\n\nI am writing to seek permission to operate a small business from my home. [Business details]\n\nThank you for your consideration.\n\nBest regards,\n[Your Name]",
-    color: "bg-red-500"
+    color: "bg-gray-800"
   }
 ];
 
@@ -81,16 +82,15 @@ export default function LetterHeads() {
           {letterFormats.map((letter, index) => (
             <div
               key={index}
-              className={`bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transform transition-all duration-300 ${
-                selectedLetter === index ? 'scale-105' : 'hover:scale-105'
-              }`}
+              className={`bg-white rounded-lg shadow-md overflow-hidden cursor-pointer transform transition-all duration-300 ${selectedLetter === index ? 'scale-105' : 'hover:scale-105'
+                }`}
               onClick={() => handleCardClick(index)}
             >
               <div className={`p-6 border-t-4 ${letter.color}`}>
-                <h2 className="text-xl font-semibold text-gray-800 mb-2">{letter.title}</h2>
+                <h2 className="text-xl font-semibold text-white mb-2">{letter.title}</h2>
                 {selectedLetter === index && (
                   <div className="mt-4">
-                    <pre className="whitespace-pre-wrap text-sm text-gray-600">{letter.format}</pre>
+                    <pre className="whitespace-pre-wrap text-sm text-white">{letter.format}</pre>
                     <button
                       onClick={handleUploadAndSend}
                       className={`mt-4 ${letter.color} text-white font-semibold py-2 px-4 rounded hover:opacity-90 transition-opacity duration-300`}

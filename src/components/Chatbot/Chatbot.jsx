@@ -3,12 +3,17 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
+import { useSession } from "next-auth/react";
 
 // Chatbot component
 export default function Chatbot() {
     const [question, setQuestion] = useState("");
     const [chatHistory, setChatHistory] = useState([]);
     const [isOpen, setIsOpen] = useState(false); // State for chatbot visibility
+    const session  = useSession();
+
+    // console.log("session in chatbot:",session);
+
 
     // Load history from localStorage on component mount
     useEffect(() => {
@@ -131,7 +136,7 @@ export default function Chatbot() {
 
 
     return (
-        <div className="absolute bottom bottom-1 right-0 z-99999">
+        <div className={`absolute bottom bottom-1 right-0 z-99999 ${session.status === "unauthenticated" ?  "hidden" : ""}`}>
             <button
                 onClick={() => setIsOpen(!isOpen)} // Toggle chatbot visibility
                 className="fixed bottom-4 right-4 bg-blue-500 hover:bg-blue-400 rounded-lg px-4 py-2 text-white"

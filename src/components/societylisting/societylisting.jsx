@@ -6,31 +6,6 @@ import { CldImage } from "next-cloudinary";
 import Image from "next/image"
 import { useEffect, useState } from "react"
 
-// Mock data for properties
-const properties = [
-    {
-        id: 1,
-        image: "/placeholder.svg?height=200&width=300",
-        name: "Greenview Residences",
-        address: "123 Park Avenue, Greenville, GV 12345",
-        secretary: "John Doe",
-    },
-    {
-        id: 2,
-        image: "/placeholder.svg?height=200&width=300",
-        name: "Sunset Heights",
-        address: "456 Sunset Boulevard, Sunnydale, SD 67890",
-        secretary: "Jane Smith",
-    },
-    {
-        id: 3,
-        image: "/placeholder.svg?height=200&width=300",
-        name: "Riverside Apartments",
-        address: "789 River Road, Riverside, RS 13579",
-        secretary: "Mike Johnson",
-    },
-    // Add more properties as needed
-]
 
 export default function SocietyListings() {
     const [socs, setSocs] = useState([]);

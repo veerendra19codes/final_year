@@ -50,7 +50,7 @@ export default function BudgetPage() {
     const [newExpense, setNewExpense] = useState({ name: '', date: '', amount: 0, category: '' })
     const [isDialogOpen, setIsDialogOpen] = useState(false)
 
-    const totalBudget = 2000
+    const totalBudget = 300000
     const budgetSpend = expenses.reduce((sum, expense) => sum + expense.amount, 0)
     const budgetBalance = totalBudget - budgetSpend
 

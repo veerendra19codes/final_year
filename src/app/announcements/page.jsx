@@ -55,7 +55,7 @@ export default function AnnouncementsPage() {
     const handleAnnouncementChange = (event) => {
         setNewAnnouncement({
             ...newAnnouncement, [event.target.name]: event.target.value,
-            secretary: user?.name, society: user?.society, societyId: user?.societyId
+            secretary: user?.email, society: user?.society, societyId: user?.societyId
         })
     }
 
@@ -70,16 +70,16 @@ export default function AnnouncementsPage() {
                         "Content-type": "application/json"
                     }
                 })
-                // console.log('res', res);
+                console.log('res', res);
                 const data = await res.json();
-                // console.log("data: ", data);
+                console.log("data: ", data);
                 setUser(data.user);
 
             } catch (error) {
                 console.log("error in fetching user by id: ", error);
             }
         }
-        { session?.data?.user?.id && fetchUserById() }
+        fetchUserById() 
     }, [session?.data?.user?.id]);
 
     useEffect(() => {
@@ -87,19 +87,21 @@ export default function AnnouncementsPage() {
             try {
                 const societyId = user?.societyId;
                 console.log("societId: ", societyId);
+                const apiUrl = `/api/announcements/${societyId}`
+                console.log("apiUrl: ", apiUrl);
                 const res = await fetch(`/api/announcements/${societyId}`, {
                     method: "GET",
                 })
                 console.log('res', res);
                 const data = await res.json();
-                console.log("data: ", data);
+                console.log("data of fetch announcements: ", data);
                 setAnnouncements(data.data);
 
             } catch (error) {
                 console.log("error in fetching user by id: ", error);
             }
         }
-        { session?.data?.user?.id && user && fetchAnnouncements() }
+        fetchAnnouncements() 
     }, [session?.data?.user?.id, user?.societyId, user]);
 
     const handleSubmitAnnouncement = async (event) => {
@@ -131,7 +133,7 @@ export default function AnnouncementsPage() {
     }
 
     const resetAnnouncementForm = () => {
-        setNewAnnouncement({ id: null, title: '', content: '' })
+        setNewAnnouncement({ title: '', content: '' })
         setIsDialogOpen(false)
         setIsEditing(false)
     }
@@ -146,16 +148,16 @@ export default function AnnouncementsPage() {
         setAnnouncements(announcements.filter(announcement => announcement.id !== id))
     }
 
-    useEffect(() => {
-        // Generating announcements in useEffect ensures they are only generated on the client-side
-        const generatedAnnouncements = Array(100).fill(null).map((_, i) => ({
-            id: i + 1,
-            title: `Announcement ${i + 1}`,
-            content: `This is the content for announcement ${i + 1}. It contains important information.`,
-            date: new Date(Date.now() - Math.floor(Math.random() * 10000000000)).toISOString().split('T')[0]
-        }))
-        setAnnouncements(generatedAnnouncements)
-    }, [])
+    // useEffect(() => {
+    //     // Generating announcements in useEffect ensures they are only generated on the client-side
+    //     const generatedAnnouncements = Array(100).fill(null).map((_, i) => ({
+    //         id: i + 1,
+    //         title: `Announcement ${i + 1}`,
+    //         content: `This is the content for announcement ${i + 1}. It contains important information.`,
+    //         date: new Date(Date.now() - Math.floor(Math.random() * 10000000000)).toISOString().split('T')[0]
+    //     }))
+    //     setAnnouncements(generatedAnnouncements)
+    // }, [])
 
 
 
@@ -195,10 +197,10 @@ export default function AnnouncementsPage() {
                                 onChange={handleSearch}
                                 className="w-full sm:w-64"
                             />
-                            {session?.data?.user?.role == "secretary" &&
+                            {user?.role == "secretary" &&
                                 <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen} className="bg-white">
                                     <DialogTrigger asChild>
-                                        <Button onClick={() => { setIsEditing(false); setNewAnnouncement({ id: null, title: '', content: '' }) }}>
+                                        <Button onClick={() => { setIsEditing(false); setNewAnnouncement({  title: '', content: '' }) }}>
                                             <Plus className="mr-2 h-4 w-4" /> New Announcement
                                         </Button>
                                     </DialogTrigger>

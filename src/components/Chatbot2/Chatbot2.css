@@ -1,0 +1,198 @@
+/* Base styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f7fb;
+    color: #333;
+    line-height: 1.6;
+  }
+  
+  /* Container */
+  .container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+  
+  /* Card */
+  .card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  /* Card Header */
+  .card-header {
+    background: linear-gradient(to right, #4a6cf7, #3b5fe2);
+    color: white;
+    padding: 1.5rem;
+    border-radius: 10px 10px 0 0;
+  }
+  
+  .card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .card-description {
+    font-size: 0.9rem;
+    opacity: 0.9;
+  }
+  
+  /* Card Content */
+  .card-content {
+    padding: 1.5rem;
+  }
+  
+  /* Fetch Button */
+  .fetch-button-container {
+    margin-bottom: 1.5rem;
+  }
+  
+  .fetch-button {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    background-color: white;
+    color: #4a6cf7;
+    border: 2px solid #4a6cf7;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.2s ease;
+  }
+  
+  .fetch-button:hover:not(:disabled) {
+    background-color: #f0f4ff;
+  }
+  
+  .fetch-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+  
+  /* Query Form */
+  .query-form {
+    margin-bottom: 1rem;
+  }
+  
+  .input-group {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .query-input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+  
+  .query-input:focus {
+    border-color: #4a6cf7;
+  }
+  
+  .query-button {
+    padding: 0.75rem 1.25rem;
+    background-color: #4a6cf7;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: background-color 0.2s ease;
+  }
+  
+  .query-button:hover:not(:disabled) {
+    background-color: #3b5fe2;
+  }
+  
+  .query-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+  
+  /* Response */
+  .response-container {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #eee;
+  }
+  
+  .response-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+  }
+  
+  .response-content {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 6px;
+    border-left: 4px solid #4a6cf7;
+    white-space: pre-wrap;
+    font-size: 0.95rem;
+  }
+  
+  /* Card Footer */
+  .card-footer {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #eee;
+    font-size: 0.8rem;
+    color: #666;
+  }
+  
+  /* Icons and Spinners */
+  .icon {
+    display: inline-block;
+  }
+  
+  .spinner {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top-color: white;
+    animation: spin 0.8s linear infinite;
+  }
+  
+  .spinner.small {
+    width: 0.8rem;
+    height: 0.8rem;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* Responsive */
+  @media (max-width: 600px) {
+    .button-text {
+      display: none;
+    }
+  
+    .query-button {
+      padding: 0.75rem;
+    }
+  }

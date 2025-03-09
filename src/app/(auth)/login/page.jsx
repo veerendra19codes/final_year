@@ -13,6 +13,7 @@ import {
     AlertTitle,
 } from "@/components/ui/alert"
 import { AlertCircle } from "lucide-react"
+import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 
 export default function Login() {
     const router = useRouter();
@@ -20,6 +21,8 @@ export default function Login() {
     const [password, setPassword] = useState("");
     const [error, setError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
+    
 
     const handleLogin = async () => {
         try {
@@ -86,11 +89,17 @@ export default function Login() {
                         {/* password */}
                         <div className='w-full'>
                             <Label htmlFor="email" >password</Label>
-                            <input type="password" placeholder="password" className="w-full pl-4 focus:outline-none py-2 border-[1px] border-black"
+                            {/* <input type="password" placeholder="password" className="w-full pl-4 focus:outline-none py-2 border-[1px] border-black"
                                 onChange={(e) => {
                                     setPassword(e.target.value)
                                     setError(false)
-                                }} />
+                                }} /> */}
+                            <div className='flex border-[1px] rounded border-black items-center gap-2 px-2 bg-white'>
+                            <input type={showPassword ? "text" : "password"} placeholder="Password" className="w-full border-none outline-none py-2" value={password} onChange={(e) => { setError(false); setErrorMessage(""); setPassword(e.target.value) }} />
+                            <button type="button" onClick={() => setShowPassword(!showPassword)} className="focus:outline-none">
+                                {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
+                            </button>
+                        </div>
                         </div>
 
                         {/* button */}

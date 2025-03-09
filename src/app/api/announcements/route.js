@@ -2,7 +2,7 @@ import { connectdb } from "@/lib/db";
 import models from "@/lib/models";
 import { NextRequest, NextResponse } from "next/server";
 
-// Add new events to the society, only can be done by committee member or secretary
+// Add new announcements to the society, only can be done by committee member or secretary
 export async function POST(req) {
   await connectdb();
   try {

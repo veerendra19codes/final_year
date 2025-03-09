@@ -21,6 +21,7 @@ import {
 } from 'lucide-react'
 import Link from 'next/link'
 import { signIn, signOut, useSession } from 'next-auth/react'
+import { usePathname } from 'next/navigation'
 
 const menuItems = [
     { name: 'Home', icon: Home, path: "/" },
@@ -28,7 +29,7 @@ const menuItems = [
     { name: 'Announcements', icon: Bell, path: "/announcements" },
     { name: 'Complaints', icon: AlertTriangle, path: "/complaints" },
     { name: 'Events', icon: Calendar, path: "/events" },
-    { name: 'Profile', icon: User, path: "/profile" },
+    // { name: 'Profile', icon: User, path: "/profile" },
     { name: 'Neighbourhood', icon: MapPin, path: "/neighbourhood" },
     { name: 'Utilities', icon: Wrench, path: "/utilities" },
     { name: 'Letter', icon: Mail, path: "/letters" },
@@ -37,17 +38,21 @@ const menuItems = [
     { name: "Budget", icon: IndianRupee, path: "/budget" }
 ]
 
+
 export default function Sidebar() {
+    const path = usePathname();
+    console.log("path:", path);
     const [isOpen, setIsOpen] = useState(true)
 
     const session = useSession();
+    // console.log("session in sidebar:",session);
     // useEffect(() => {
     //     if(session.data?.user?.role == "guest")
     // })
     return (
         <div className={cn(
             "flex flex-col h-screen bg-blue-700 text-white transition-all duration-300 ease-in-out",
-            isOpen ? "w-64" : "w-16"
+            isOpen ? "w-64" : "w-16", session.status === "unauthenticated" ? "hidden" : ""
         )}>
             <div className="flex justify-between p-4">
                 {isOpen ?
@@ -69,7 +74,10 @@ export default function Sidebar() {
                                 SignOut
                             </Button>
                             :
-                            <Button className="bg-blue-500 hover:bg-blue-300 mx-4 w-full" onClick={() => signIn()}>
+                            <Button className="bg-blue-500 hover:bg-blue-300 mx-4 w-full" onClick={() => {
+                                console.log("clicked")
+                                signIn()
+                            }}>
                                 SignIn
                             </Button>
                         }
@@ -98,7 +106,8 @@ export default function Sidebar() {
                                     variant="ghost"
                                     className={cn(
                                         "w-full justify-start",
-                                        isOpen ? "px-4" : "px-0 justify-center"
+                                        isOpen ? "px-4" : "px-0 justify-center",
+                                        path == item.path ? "bg-white text-black" : ""
                                     )}
                                 >
                                     <item.icon className="h-5 w-5 mr-2" />

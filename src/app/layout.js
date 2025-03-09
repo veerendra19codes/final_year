@@ -1,9 +1,12 @@
+
 import localFont from "next/font/local";
 import "./globals.css";
-import Navbar from "@/components/Navbar/Navbar";
+// import Navbar from "@/components/Navbar/Navbar";
 import { Providers } from "@/providers";
 import Sidebar from "@/components/sidebar/sidebar";
-import Chatbot from "@/components/Chatbot/Chatbot";
+// import Chatbot from "@/components/Chatbot/Chatbot";
+// import Chatbot2 from "@/components/Chatbot2/Chatbot2";
+// import { useNavigate } from "next/navigation";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -22,19 +25,23 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
+  
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Providers>
+          
           <div className="flex h-screen overflow-hidden">
             <Sidebar />
             <main className="flex-1 overflow-auto">
               {children}
             </main>
-            <Chatbot />
+            {/* <Chatbot /> */}
+            {/* <Chatbot2 /> */}
           </div>
+          
         </Providers>
       </body>
     </html>

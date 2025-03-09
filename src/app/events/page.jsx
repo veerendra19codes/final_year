@@ -31,7 +31,7 @@ const initialEvents = Array(100).fill(null).map((_, i) => ({
     id: i + 1,
     title: `Event ${i + 1}`,
     description: `This is the description for Event ${i + 1}. It includes details about the event.`,
-    image: `/placeholder.svg?height=200&width=200&text=Event+${i + 1}`,
+    image: "/hero2.jpeg",
     fromTime: new Date(2023, 0, 1, 10, 0).toISOString(),
     toTime: new Date(2023, 0, 1, 12, 0).toISOString(),
     listedAt: new Date(2022, 11, 31, 9, 0).toISOString(),
@@ -160,7 +160,7 @@ export default function EventsPage() {
                                 className="pl-8"
                             />
                         </div>
-                        {session?.data?.user?.role == "secretary" &&
+                        {user?.role == "secretary" &&
                             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                                 <DialogTrigger asChild>
                                     <Button>
