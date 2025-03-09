@@ -16,6 +16,7 @@
     "@radix-ui/react-slot": "^1.1.0",
     "@react-google-maps/api": "^2.19.3",
     "autoprefixer": "^10.4.20",
+    "axios": "^1.8.2",
     "bcryptjs": "^2.4.3",
     "class-variance-authority": "^0.7.0",
     "cloudinary": "^2.5.1",
