@@ -196,6 +196,7 @@ export default function BudgetPage() {
   };
 
   // Function to fetch monthly balance data from January to the current month
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const fetchMonthlyLineData = async () => {
     if (!societyId) return;
     const currentDate = new Date();
@@ -249,7 +250,7 @@ export default function BudgetPage() {
     if (societyId) {
       fetchMonthlyLineData();
     }
-  }, [societyId]);
+  }, [societyId, fetchMonthlyLineData]);
 
   return (
     <div className="container mx-auto p-4 space-y-6 bg-white text-black">
@@ -344,9 +345,9 @@ export default function BudgetPage() {
               </div>
             </div>
             <DialogFooter>
-              <DialogClose className="bg-gray-200 hover:bg-gray-100 p-2 rounded-lg text-black">
+              <DialogClose className="bg-gray-200 hover:bg-gray-100 text-black rounded-lg p-2">
                 Cancel
-              <DialogClose>
+              </DialogClose>
               <Button type="submit" onClick={handleAddExpense} className="bg-blue-500 hover:bg-blue-400">
                 Add Expense
               </Button>
