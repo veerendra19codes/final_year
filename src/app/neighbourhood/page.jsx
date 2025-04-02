@@ -1,68 +1,37 @@
-'use client'
-import React, { useState, useEffect } from 'react';
-import GoogleMapComponent from '../../../src/components/GoogleMap.js';
+"use client";
+import React, { useState, useEffect } from "react";
+import GoogleMapComponent from "../../../src/components/GoogleMap.js";
 
 const Neighbourhood = () => {
   const [userLocation, setUserLocation] = useState(null);
-  console.log(process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY)
-  const googleApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY; // Use environment variables in production
+  const googleApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
 
   useEffect(() => {
-    // Get user's real-time location
     navigator.geolocation.getCurrentPosition(
       (position) => {
-        const { latitude, longitude } = position.coords;
-        setUserLocation({ lat: latitude, lng: longitude });
+        setUserLocation({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
       },
-      (error) => {
-        console.error("Error fetching location: ", error);
-      }
+      (error) => console.error("Error fetching location: ", error)
     );
   }, []);
 
-  if (!userLocation) {
-    return <div>Loading your location...</div>;
-  }
+  if (!userLocation) return <div>Loading your location...</div>;
 
   return (
-    <div>
-      <h1 className="text-3xl font-bold mb-6">Neighbourhood</h1>
+    <div className="p-6">
+      <h1 className="text-3xl font-bold mb-6 text-center">Neighbourhood</h1>
 
-      {/* Police Station Section */}
-      <section className="mb-8 w-[80%] mx-auto">
-        <h2 className="text-xl font-bold mb-4">Nearby Police Stations</h2>
-        <div className="border rounded-lg p-4 shadow-md">
-          <GoogleMapComponent
-            apiKey={googleApiKey}
-            placesType="police"
-            userLocation={userLocation}
-          />
-        </div>
-      </section>
-
-      {/* Hospital Section */}
-      <section className="mb-8 w-[80%] mx-auto">
-        <h2 className="text-xl font-bold mb-4">Nearby Hospitals</h2>
-        <div className="border rounded-lg p-4 shadow-md">
-          <GoogleMapComponent
-            apiKey={googleApiKey}
-            placesType="hospital"
-            userLocation={userLocation}
-          />
-        </div>
-      </section>
-
-      {/* Metro Station Section */}
-      <section className="mb-8 w-[80%] mx-auto">
-        <h2 className="text-xl font-bold mb-4">Nearby Metro Stations</h2>
-        <div className="border rounded-lg p-4 shadow-md">
-          <GoogleMapComponent
-            apiKey={googleApiKey}
-            placesType="subway_station"
-            userLocation={userLocation}
-          />
-        </div>
-      </section>
+      {["police", "hospital", "subway station"].map((type, index) => (
+        <section key={index} className="mb-8 w-[80%] mx-auto">
+          <h2 className="text-xl font-bold mb-4 capitalize">Nearby {type}s</h2>
+          <div className="border rounded-lg p-4 shadow-md bg-white">
+            <GoogleMapComponent apiKey={googleApiKey} placesType={type} userLocation={userLocation} />
+          </div>
+        </section>
+      ))}
     </div>
   );
 };

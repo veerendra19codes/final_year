@@ -5,6 +5,7 @@ const User = models.User;
 
 export async function POST(req) {
     try {
+        console.log("DO i even get here")
         await connectdb();
         const { id } = await req.json();
         console.log("id: ", id);

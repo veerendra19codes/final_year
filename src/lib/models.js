@@ -7,62 +7,35 @@ let Event;
 let Complaint;
 let Utility;
 let Announcements;
+let Visitor;
+
+
+let Budget; 
 
 // Existing User schema
 const userSchema = new mongoose.Schema({
-    firstname: {
-        type: String,
-        required: true,
-        trim: true,
-    },
-    lastname: {
-        type: String,
-        required: true,
-        trim: true,
-    },
-    name: {
-        type: String,
-        // required: true,
-        trim: true,
-    },
-    email: {
-        type: String,
-        unique: true,
-        required: true,
-        trim: true,
-    },
-    password: {
-        type: String,
-        required: true,
-        trim: true,
-    },
+    firstname: { type: String, required: true, trim: true },
+    lastname: { type: String, required: true, trim: true },
+    name: { type: String, trim: true },
+    email: { type: String, unique: true, required: true, trim: true },
+    password: { type: String, required: true, trim: true },
     role: {
         type: String,
         enum: ["watchman", "secretary", "member", "committeeMember", "guest"],
         default: "guest", 
         required: true,
     },
-    maintenanceAmount: {
-        type: Number,
-        default: 10000, 
-    },
-    maintenanceStatus: {
-        type: String,
-        enum: ["paid", "unpaid"],
-        default: "unpaid", 
-    },
-    datePaid: {
-        type: Date, 
-        default: null, 
-    },
-    society: {
-        type: String,
-        trim: true,
-    },
-    societyId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Society",
-    }
+    maintenanceAmount: { type: Number, default: 10000 },
+    maintenanceStatus: { type: String, enum: ["paid", "unpaid"], default: "unpaid" },
+    datePaid: { type: Date, default: null },
+    society: { type: String, trim: true },
+    societyId: { type: mongoose.Schema.Types.ObjectId, ref: "Society" },
+    phoneNumber: { type: String, trim: true },  // New field
+    address: { type: String, trim: true },  // New field
+    dob: { type: Date },  // New field
+    gender: { type: String, enum: ["male", "female", "other"] },  // New field
+    profileImage: { type: String },  // New field for profile image
+    
 }, { timestamps: true });
 
 // Existing Society schema
@@ -285,54 +258,46 @@ const utilitySchema = new mongoose.Schema({
     }
 }, {timestamps: true});
 
-
+//budget ka schema
 const budgetSchema = new mongoose.Schema({
-    name:{
-        type: String,
-        required: true,
-        trim: true,
-    },
-    description: {
-        type: String,
-        required: true,
-        trim: true,
-    },
-    rating:{
-        type: String,
-        default: 0,
-    },
-    review:[
-        {
-        type:String,
-        // required: true,
-        trim: true,
-        }
-    ],
-    image:{
-        type: String,
-        // required: true,
-        trim: true,
-    },
-    utilityType: {
-        type: String,
-        required: true,
-        trim: true,
-    },
-    phoneNumber: {
-        type: String,
-        required: true,
-        trim: true,
+    month: {
+      type: String, // e.g. "2023-06"
+      required: true,
     },
     societyId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Society", 
-        required: true,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Society",
+      required: true,
     },
-    society: {
-        type: String
-    }
-}, {timestamps: true});
+    totalBudget: {
+      type: Number,
+      default: 300000,
+    },
+    expenses: [
+      {
+        name: String,
+        date: Date,
+        amount: Number,
+        category: String,
+      }
+    ],
+  }, { timestamps: true });
 
+  const visitorSchema = new mongoose.Schema(
+    {
+      name: { type: String, required: true, trim: true },
+      attendingHouse: { type: String, required: true, trim: true },
+      time: { type: Date, default: Date.now, required: true },
+      societyId: { type: mongoose.Schema.Types.ObjectId, ref: "Society", required: true },
+    },
+    { timestamps: true }
+  );
+
+  try {
+    Visitor = mongoose.model("Visitor");
+  } catch (error) {
+    Visitor = mongoose.model("Visitor", visitorSchema);
+  }
 
 try {
     User = mongoose.model("User");
@@ -376,6 +341,10 @@ try {
     Announcements= mongoose.model("Announcements", announcementsSchema);
 }
 
-
-const models = { User, Society, Registry, Event, Complaint, Utility, Announcements };
+try {
+    Budget = mongoose.model("Budget");
+  } catch (error) {
+    Budget = mongoose.model("Budget", budgetSchema);
+  }
+const models = { User, Society, Registry, Event, Complaint, Utility, Announcements ,Budget,Visitor};
 export default models;

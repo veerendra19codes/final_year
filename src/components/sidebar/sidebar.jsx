@@ -8,11 +8,13 @@ import {
     ChevronRight,
     Home,
     Users,
+    User,
     Bell,
     AlertTriangle,
     Calendar,
-    User,
+    QrCode,
     MapPin,
+    Search,
     Wrench,
     Mail,
     Laptop,
@@ -35,7 +37,12 @@ const menuItems = [
     { name: 'Letter', icon: Mail, path: "/letters" },
     // { name: 'Meetings', icon: Laptop, path: "/meetings" },
     { name: "Discussions", icon: MessageCircleWarning, path: "/discussion" },
-    { name: "Budget", icon: IndianRupee, path: "/budget" }
+    { name: "Budget", icon: IndianRupee, path: "/budget" },
+    {name:"Profile",icon:User,path:"/profile"},
+    {name:"Find Members",icon:Search,path:"/friends"},
+    {name:"Validate QR code",icon:QrCode,path:"/validate"},
+    {name:"Generate QR code",icon:QrCode,path:"/generate"}
+
 ]
 
 
