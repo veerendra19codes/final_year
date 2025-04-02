@@ -80,96 +80,99 @@ export default function SocietyPage() {
     };
 
     return (
-      <div className="p-6">
-        <h1 className="text-2xl font-bold">Society Page</h1>
+      <div className="min-h-screen bg-white text-blue-600 p-8">
+          <h1 className="text-3xl font-bold text-center mb-6">Society Management</h1>
 
-        <div className="mt-6">
-          <h2 className="text-xl font-semibold">Create a Society</h2>
+          <div className="bg-blue-100 p-6 rounded-lg shadow-lg max-w-2xl mx-auto">
+              <h2 className="text-xl font-semibold mb-4">Create a Society</h2>
 
-          <input
-            type="text"
-            placeholder="Society Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="block w-full p-2 border rounded-md"
-          />
+              <input
+                  type="text"
+                  placeholder="Society Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  className="block w-full p-3 border border-blue-300 rounded-md mb-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
 
-          <input
-            type="text"
-            placeholder="Society Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="block w-full p-2 border rounded-md mt-2"
-          />
+              <input
+                  type="password"
+                  placeholder="Society Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="block w-full p-3 border border-blue-300 rounded-md mb-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
 
-          <input
-            type="text"
-            placeholder="Address"
-            value={address}
-            onChange={(e) => setAddress(e.target.value)}
-            className="block w-full p-2 border rounded-md mt-2"
-          />
+              <input
+                  type="text"
+                  placeholder="Address"
+                  value={address}
+                  onChange={(e) => setAddress(e.target.value)}
+                  className="block w-full p-3 border border-blue-300 rounded-md mb-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
 
-          <input
-            type="text"
-            placeholder="Image URL"
-            value={image}
-            onChange={(e) => setImage(e.target.value)}
-            className="block w-full p-2 border rounded-md mt-2"
-          />
+              <input
+                  type="text"
+                  placeholder="Image URL"
+                  value={image}
+                  onChange={(e) => setImage(e.target.value)}
+                  className="block w-full p-3 border border-blue-300 rounded-md mb-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              />
 
-          <button
-            onClick={handleCreateSociety}
-            className="mt-4 p-2 bg-blue-500 text-white rounded"
-          >
-            Create Society
-          </button>
-        </div>
+              <button
+                  onClick={handleCreateSociety}
+                  className="w-full bg-blue-500 text-white p-3 rounded-lg font-semibold hover:bg-blue-600 transition duration-300"
+              >
+                  Create Society
+              </button>
+          </div>
 
-        <div className="mt-4">
-          {mysocieties && mysocieties.length > 0 && (
-            <div>
-              <h2 className="text-xl font-semibold">My Societies</h2>
-              {mysocieties.map((society) => (
-                <div
-                  key={society._id}
-                  className="p-4 border rounded-lg shadow-md mb-4"
-                >
-                  <h3 className="text-lg font-bold">{society.name}</h3>
-                  <p>{society.address}</p>
-                  <p>Secretary: {society.secretary}</p>
-                  <p>
-                    Invite Link:{" "}
-                    <a href={society.inviteLink}>{society.inviteLink}</a>
-                  </p>
-                  <p>{society.secretary == session.user.email ? "Your are the secretary": "You are a member"}</p>
-                </div>
-              ))}
-            </div>
+          {mysocieties.length > 0 && (
+              <div className="mt-8 max-w-3xl mx-auto">
+                  <h2 className="text-2xl font-semibold mb-4">My Societies</h2>
+                  {mysocieties.map((society) => (
+                      <div
+                          key={society._id}
+                          className="p-4 border border-blue-300 bg-blue-50 rounded-lg shadow-md mb-4"
+                      >
+                          <h3 className="text-xl font-bold">{society.name}</h3>
+                          <p className="text-blue-700">{society.address}</p>
+                          <p className="text-sm text-blue-500">Secretary: {society.secretary}</p>
+                          <p className="text-sm">
+                              Invite Link:{" "}
+                              <a href={society.inviteLink} className="text-blue-500 underline">
+                                  {society.inviteLink}
+                              </a>
+                          </p>
+                          <p className="mt-2 font-semibold">
+                              {society.secretary === session.user.email
+                                  ? "You are the secretary"
+                                  : "You are a member"}
+                          </p>
+                      </div>
+                  ))}
+              </div>
           )}
-        </div>
 
-        <div className="mt-4">
           {societies.length > 0 && (
-            <div>
-              <h2 className="text-xl font-semibold">All Societies</h2>
-              {societies.map((society) => (
-                <div
-                  key={society._id}
-                  className="p-4 border rounded-lg shadow-md mb-4"
-                >
-                  <h3 className="text-lg font-bold">{society.name}</h3>
-                  <p>{society.address}</p>
-                  <p>Secretary: {society.secretary}</p>
-                  <p>
-                    Invite Link:{" "}
-                    <a href={society.inviteLink}>{society.inviteLink}</a>
-                  </p>
-                </div>
-              ))}
-            </div>
+              <div className="mt-8 max-w-3xl mx-auto">
+                  <h2 className="text-2xl font-semibold mb-4">All Societies</h2>
+                  {societies.map((society) => (
+                      <div
+                          key={society._id}
+                          className="p-4 border border-blue-300 bg-blue-50 rounded-lg shadow-md mb-4"
+                      >
+                          <h3 className="text-xl font-bold">{society.name}</h3>
+                          <p className="text-blue-700">{society.address}</p>
+                          <p className="text-sm text-blue-500">Secretary: {society.secretary}</p>
+                          <p className="text-sm">
+                              Invite Link:{" "}
+                              <a href={society.inviteLink} className="text-blue-500 underline">
+                                  {society.inviteLink}
+                              </a>
+                          </p>
+                      </div>
+                  ))}
+              </div>
           )}
-        </div>
       </div>
-    );
-}
+  );}

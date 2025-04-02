@@ -17,7 +17,7 @@ import Link from 'next/link'
 export default function AnnouncementsPage() {
     const session = useSession();
     console.log("session: ", session);
-
+    
     const [announcements, setAnnouncements] = useState([])
     const [currentPage, setCurrentPage] = useState(1)
     const [itemsPerPage, setItemsPerPage] = useState(10)
