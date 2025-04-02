@@ -60,7 +60,7 @@ export default function Login() {
 
 
                     {/* form */}
-                    <div className=' flex flex-col items-center justify-center p-4 gap-4  w-[80%]' >
+                    <div className='text-black flex flex-col items-center justify-center p-4 gap-4  w-[80%]' >
                         <div className='flex flex-col justify-center items-center'>
                             <div className='font-semibold text-2xl'>
                                 LOGIN
@@ -76,7 +76,7 @@ export default function Login() {
 
                         <div className='w-full'>
                             <Label htmlFor="email" >Email</Label>
-                            <div className='flex border-[1px] rounded border-black items-center gap-2 px-2 bg-white'>
+                            <div className='flex border-[1px] rounded border-black items-center gap-2 px-2 bg-white text-black'>
                                 <MdEmail />
                                 <input type="email" placeholder="Email" className="w-full border-none outline-none focus:border-none focus:outline-none py-2"
                                     onChange={(e) => {
@@ -94,7 +94,7 @@ export default function Login() {
                                     setPassword(e.target.value)
                                     setError(false)
                                 }} /> */}
-                            <div className='flex border-[1px] rounded border-black items-center gap-2 px-2 bg-white'>
+                            <div className='flex border-[1px] rounded border-black items-center gap-2 px-2 bg-white text-black'>
                             <input type={showPassword ? "text" : "password"} placeholder="Password" className="w-full border-none outline-none py-2" value={password} onChange={(e) => { setError(false); setErrorMessage(""); setPassword(e.target.value) }} />
                             <button type="button" onClick={() => setShowPassword(!showPassword)} className="focus:outline-none">
                                 {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}

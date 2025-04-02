@@ -124,7 +124,7 @@ export default function AnnouncementsPage() {
                 console.log("res: ", res);
                 const data = await res.json();
                 console.log("data: ", data);
-
+                // setAnnoucements({...announcements, data})
             } catch (error) {
                 console.log("error in adding an announcement: ", error);
             }
@@ -184,10 +184,11 @@ export default function AnnouncementsPage() {
 
 
     return (
-        <>
+        <div className="min-h-screen bg-white text-black">
             {(session.data?.user && user) ?
-                <div className="container mx-auto p-4 space-y-6">
-                    <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
+                <div className="container mx-auto p-4 space-y-6 bg-white text-black min-h-screen flex justify-start items-start flex-col w-full">
+
+                    <div className="w-full flex flex-col sm:flex-row justify-between items-center gap-4 px-4">
                         <h1 className="text-2xl font-bold">Announcements</h1>
                         <div className="flex items-center gap-4">
                             <Input
@@ -200,11 +201,11 @@ export default function AnnouncementsPage() {
                             {user?.role == "secretary" &&
                                 <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen} className="bg-white">
                                     <DialogTrigger asChild>
-                                        <Button onClick={() => { setIsEditing(false); setNewAnnouncement({  title: '', content: '' }) }}>
+                                        <Button onClick={() => { setIsEditing(false); setNewAnnouncement({  title: '', content: '' }) }} className="bg-blue-500 hover:bg-blue-400 text-white">
                                             <Plus className="mr-2 h-4 w-4" /> New Announcement
                                         </Button>
                                     </DialogTrigger>
-                                    <DialogContent className="sm:max-w-[425px] bg-white">
+                                    <DialogContent className="sm:max-w-[425px] bg-white text-black">
                                         <DialogHeader>
                                             <DialogTitle>{isEditing ? 'Edit Announcement' : 'Add New Announcement'}</DialogTitle>
                                         </DialogHeader>
@@ -233,7 +234,7 @@ export default function AnnouncementsPage() {
                                                 <Button type="button" variant="outline" onClick={resetAnnouncementForm}>
                                                     Cancel
                                                 </Button>
-                                                <Button type="submit">{isEditing ? 'Update' : 'Add'} Announcement</Button>
+                                                <Button type="submit" className="bg-blue-500 hover:bg-blue-400 text-white">{isEditing ? 'Update' : 'Add'} Announcement</Button>
                                             </div>
                                         </form>
                                     </DialogContent>
@@ -268,6 +269,7 @@ export default function AnnouncementsPage() {
                         ))}
                     </div>
 
+                    {totalPages > 1 && 
                     <div className="flex flex-col bg-white sm:flex-row justify-between items-center gap-4">
                         <div className="flex items-center gap-2">
                             <span>Show</span>
@@ -304,11 +306,11 @@ export default function AnnouncementsPage() {
                                 <ChevronRight className="h-4 w-4" />
                             </Button>
                         </div>
-                    </div>
+                    </div>}
                 </div>
                 :
-                <div className="border-[1px] border-red-500 rounded-xl mt-16 p-4 text-start">
-                    You need to login before listing your society
+                <div className="border-[1px] border-red-500 rounded-xl  p-4 text-start mx-4 bg-white text-black">
+                    You need to login
                     <br>
                     </br>
                     <Link href={"/login"} className="text-blue-500 hover:text-blue-300 underline">
@@ -316,6 +318,6 @@ export default function AnnouncementsPage() {
                     </Link>
                 </div>
             }
-        </>
+        </div>
     )
 }

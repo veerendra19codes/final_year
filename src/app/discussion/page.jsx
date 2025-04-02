@@ -12,7 +12,7 @@ import {
     CardHeader,
     CardTitle,
 } from "@/components/ui/card"
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger, DialogClose } from "@/components/ui/dialog"
 import { ThumbsUp, ThumbsDown, PlusIcon } from 'lucide-react'
 
 // type Idea = {
@@ -66,16 +66,16 @@ export default function DiscussionsPage() {
     }
 
     return (
-        <div className="container mx-auto p-4 space-y-6">
+        <div className="container mx-auto p-4 space-y-6 bg-white text-black min-h-screen w-full">
             <div className="flex justify-between items-center">
                 <h1 className="text-3xl font-bold">Discussions</h1>
                 <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                     <DialogTrigger asChild>
-                        <Button>
+                        <Button className="bg-blue-500 hover:bg-blue-400">
                             <PlusIcon className="mr-2 h-4 w-4" /> Post New Idea
                         </Button>
                     </DialogTrigger>
-                    <DialogContent className="sm:max-w-[425px] bg-white">
+                    <DialogContent className="sm:max-w-[425px] bg-white text-black">
                         <DialogHeader>
                             <DialogTitle>Post a New Idea</DialogTitle>
                             <DialogDescription>
@@ -107,7 +107,10 @@ export default function DiscussionsPage() {
                             </div>
                         </div>
                         <DialogFooter>
-                            <Button type="submit" onClick={handleAddIdea}>Post Idea</Button>
+                            <DialogClose className="bg-gray-200 hover:bg-gray-100 p-2 rounded-lg">
+                                Cancel
+                            </DialogClose>
+                            <Button type="submit" onClick={handleAddIdea} className="bg-blue-500 hover:bg-blue-400">Post Idea</Button>
                         </DialogFooter>
                     </DialogContent>
                 </Dialog>

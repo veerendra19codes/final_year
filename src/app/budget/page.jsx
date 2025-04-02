@@ -19,6 +19,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogClose
 } from "@/components/ui/dialog";
 import {
   Table,
@@ -251,7 +252,7 @@ export default function BudgetPage() {
   }, [societyId]);
 
   return (
-    <div className="container mx-auto p-4 space-y-6">
+    <div className="container mx-auto p-4 space-y-6 bg-white text-black">
       {/* Month Selector and Load */}
       <div className="flex justify-between items-center">
         <h1 className="text-3xl font-bold">Society Budget</h1>
@@ -261,7 +262,7 @@ export default function BudgetPage() {
             value={month}
             onChange={(e) => setMonth(e.target.value)}
           />
-          <Button onClick={loadBudget}>Load Budget</Button>
+          <Button onClick={loadBudget} className="bg-blue-500 hover:bg-blue-400">Load Budget</Button>
         </div>
       </div>
 
@@ -275,7 +276,7 @@ export default function BudgetPage() {
             onChange={(e) => setTotalBudget(Number(e.target.value))}
             className="max-w-xs"
           />
-          <Button onClick={saveBudget}>Save Budget</Button>
+          <Button onClick={saveBudget} className="bg-blue-500 hover:bg-blue-400">Save Budget</Button>
         </div>
       )}
 
@@ -283,11 +284,11 @@ export default function BudgetPage() {
       {user.role === "secretary" && (
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
-            <Button>
-              <PlusCircle className="mr-2 h-4 w-4" /> Add New Expense
+            <Button className="bg-blue-500 hover:bg-blue-400">
+              <PlusCircle className="mr-2 h-4 w-4 " /> Add New Expense
             </Button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px] bg-white">
+          <DialogContent className="sm:max-w-[425px] bg-white text-black">
             <DialogHeader>
               <DialogTitle>Add New Expense</DialogTitle>
               <DialogDescription>
@@ -343,7 +344,10 @@ export default function BudgetPage() {
               </div>
             </div>
             <DialogFooter>
-              <Button type="submit" onClick={handleAddExpense}>
+              <DialogClose className="bg-gray-200 hover:bg-gray-100 p-2 rounded-lg text-black">
+                Cancel
+              <DialogClose>
+              <Button type="submit" onClick={handleAddExpense} className="bg-blue-500 hover:bg-blue-400">
                 Add Expense
               </Button>
             </DialogFooter>

@@ -53,7 +53,7 @@ export default function Signup() {
             <div className="flex w-[80%] h-[80%] bg-blue-500 justify-center items-center rounded-2xl ">
                 <div className='bg-blue-500 w-[50%] h-full'></div>
                 <div className='flex bg-gray-100 w-[50%] items-center justify-center rounded-r-xl py-8'>
-                    <form className='flex flex-col items-center justify-center p-4 gap-4 w-[80%]' onSubmit={handleRegister}>
+                    <form className='text-black flex flex-col items-center justify-center p-4 gap-4 w-[80%]' onSubmit={handleRegister}>
                         <div className='flex flex-col justify-center items-center'>
                             <div className='font-semibold text-2xl'>REGISTER</div>
                             <div className='text-gray-400 text-lg'>Enter your info to register</div>
@@ -61,14 +61,14 @@ export default function Signup() {
                         <div className='flex gap-5 w-full'>
                             <div className='flex flex-col w-[50%] '>
                                 <Label htmlFor="firstname">Firstname</Label>
-                                <div className='flex border-[1px] rounded border-black items-center gap-2 px-2 bg-white'>
+                                <div className='flex border-[1px] rounded border-black items-center gap-2 px-2 bg-white text-black'>
                                     <CgProfile />
                                     <input type="text" placeholder="Firstname" className="w-full border-none outline-none py-2" value={firstname} onChange={(e) => { setError(false); setErrorMessage(""); setFirstname(e.target.value) }} />
                                 </div>
                             </div>
                             <div className='flex flex-col w-[50%]'>
                                 <Label htmlFor="lastname">Lastname</Label>
-                                <div className='flex border-[1px] rounded border-black items-center gap-2 px-2 bg-white'>
+                                <div className='flex border-[1px] rounded border-black items-center gap-2 px-2 bg-white text-black'>
                                     <CgProfile />
                                     <input type="text" placeholder="Lastname" className="w-full border-none outline-none py-2" value={lastname} onChange={(e) => { setError(false); setErrorMessage(""); setLastname(e.target.value) }} />
                                 </div>

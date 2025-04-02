@@ -10,9 +10,9 @@ export default function Home() {
   return (
     <div className="w-full flex flex-col">
       <div 
-        className="hero flex w-full justify-center items-center min-h-screen"
+        className="hero flex w-full justify-center items-center min-h-screen bg-gradient-to-r from-white to-blue-500"
         style={{
-          background: "linear-gradient(to right, #dceeff, rgba(255, 255, 255, 0))",
+          // background: "linear-gradient(to right, #dceeff, rgba(0, 0, 255, 0))",
           transition: "background 0.5s ease-in-out",
         }}
       >

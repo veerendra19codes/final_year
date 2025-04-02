@@ -23,7 +23,7 @@ function UtilityCard({ utility, openReview }) {
 
 
   return (
-    <div className={`rounded-lg overflow-hidden shadow-lg bg-blue-200 border-l-4`}>
+    <div className={`rounded-lg overflow-hidden shadow-lg bg-blue-200 border-l-4 bg-white text-black`}>
       <div className="px-6 py-4">
         <div className="font-bold text-xl mb-2">{utility.name}</div>
         <p className="text-gray-700 text-base mb-2">{utility.description}</p>
@@ -188,7 +188,7 @@ export default function UtilityDashboard() {
 
 
   return (
-    <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen py-12 px-4 sm:px-6 lg:px-8 bg-white text-black">
       <div className="max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-12">
           <h1 className="text-4xl font-bold text-gray-800">
@@ -293,10 +293,13 @@ export default function UtilityDashboard() {
                   />
                 </div>
 
-                <div className="flex items-center justify-end">
+                <div className="flex items-center justify-end gap-2">
+                  <button className="bg-gray-200 hover:bg-gray-100 text-black rounded-lg p-2" onClick={() => setIsAddUtilityOpen(false)}>
+                    Cancel
+                  </button>
                   <button
                     type="submit"
-                    className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                    className="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                   >
                     Add Utility
                   </button>

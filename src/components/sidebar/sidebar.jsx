@@ -41,8 +41,8 @@ const menuItems = [
     {name:"Profile",icon:User,path:"/profile"},
     {name:"Find Members",icon:Search,path:"/friends"},
     {name:"Validate QR code",icon:QrCode,path:"/validate"},
-    {name:"Generate QR code",icon:QrCode,path:"/generate"}
-
+    {name:"Generate QR code",icon:QrCode,path:"/generate"},
+    {name:"Entries", icon:QrCode, path:"/entries"}
 ]
 
 
@@ -105,7 +105,7 @@ export default function Sidebar() {
                 }
             </div>
             <nav className="flex-1">
-                <ul className="space-y-2 py-4">
+                <ul className="space-y-2 py-4 max-h-[80vh] overflow-y-auto">
                     {menuItems.map((item) => (
                         <li key={item.name}>
                             <Link href={item.path}>

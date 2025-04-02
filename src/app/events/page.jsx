@@ -20,7 +20,7 @@ import {
     CardTitle,
 } from "@/components/ui/card"
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination"
-import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
+import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { CalendarIcon, ClockIcon, PlusIcon, SearchIcon, EditIcon, TrashIcon } from 'lucide-react'
 import Image from 'next/image'
 import { useSession } from 'next-auth/react'
@@ -146,7 +146,7 @@ export default function EventsPage() {
 
 
     return (
-        <>
+        <div className="bg-white text-black min-h-screen w-full">
             {(session.data?.user && user) ?
                 <div className="container mx-auto p-4 space-y-6">
                     <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
@@ -163,11 +163,11 @@ export default function EventsPage() {
                         {user?.role == "secretary" &&
                             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                                 <DialogTrigger asChild>
-                                    <Button>
+                                    <Button className="bg-blue-500 hover:bg-blue-400">
                                         <PlusIcon className="mr-2 h-4 w-4" /> Add New Event
                                     </Button>
                                 </DialogTrigger>
-                                <DialogContent className="sm:max-w-[425px] bg-white">
+                                <DialogContent className="sm:max-w-[425px] bg-white text-black">
                                     <DialogHeader>
                                         <DialogTitle>Add New Event</DialogTitle>
                                         <DialogDescription>
@@ -234,7 +234,8 @@ export default function EventsPage() {
                                         </div>
                                     </div>
                                     <DialogFooter>
-                                        <Button type="submit" onClick={handleAddEvent}>Save event</Button>
+                                        <DialogClose className="bg-gray-200 hover:bg-gray-100 text-black p-2 rounded-lg">Cancel</DialogClose>
+                                        <Button type="submit" onClick={handleAddEvent} className="bg-blue-500 hover:bg-blue-400">Save event</Button>
                                     </DialogFooter>
                                 </DialogContent>
                             </Dialog>
@@ -333,6 +334,6 @@ export default function EventsPage() {
                     </Link>
                 </div>
             }
-        </>
+        </div>
     )
 }

@@ -21,7 +21,7 @@ const Neighbourhood = () => {
   if (!userLocation) return <div>Loading your location...</div>;
 
   return (
-    <div className="p-6">
+    <div className="p-6 bg-white text-black">
       <h1 className="text-3xl font-bold mb-6 text-center">Neighbourhood</h1>
 
       {["police", "hospital", "subway station"].map((type, index) => (
