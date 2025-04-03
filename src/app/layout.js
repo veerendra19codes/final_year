@@ -5,7 +5,7 @@ import "./globals.css";
 import { Providers } from "@/providers";
 import Sidebar from "@/components/sidebar/sidebar";
 // import Chatbot from "@/components/Chatbot/Chatbot";
-// import Chatbot2 from "@/components/Chatbot2/Chatbot2";
+import Chatbot2 from "@/components/Chatbot2/Chatbot2";
 // import { useNavigate } from "next/navigation";
 
 const geistSans = localFont({
@@ -39,7 +39,7 @@ export default function RootLayout({ children }) {
               {children}
             </main>
             {/* <Chatbot /> */}
-            {/* <Chatbot2 /> */}
+            <Chatbot2 />
           </div>
           
         </Providers>
