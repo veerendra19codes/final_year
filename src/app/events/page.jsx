@@ -138,7 +138,7 @@ export default function EventsPage() {
                 setUser(data.user);
 
             } catch (error) {
-                console.log("error in fetching user by id: ", error);
+                console.log("error in fetching user by id:oknmi ", error);
             }
         }
         { session?.data?.user?.id && fetchUserById() }

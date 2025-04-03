@@ -364,7 +364,7 @@ export default function BudgetPage() {
             <Wallet className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">${budgetBalance.toFixed(2)}</div>
+            <div className="text-2xl font-bold">Rs. {budgetBalance.toFixed(2)}</div>
             <p className="text-xs text-muted-foreground">
               Remaining from total budget
             </p>
@@ -376,7 +376,7 @@ export default function BudgetPage() {
             <TrendingDown className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">${budgetSpend.toFixed(2)}</div>
+            <div className="text-2xl font-bold">Rs. {budgetSpend.toFixed(2)}</div>
             <p className="text-xs text-muted-foreground">
               Total expenses so far
             </p>
@@ -388,7 +388,7 @@ export default function BudgetPage() {
             <DollarSign className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">${totalBudget.toFixed(2)}</div>
+            <div className="text-2xl font-bold">Rs.{totalBudget.toFixed(2)}</div>
             <p className="text-xs text-muted-foreground">
               Allocated budget for the period
             </p>
@@ -424,7 +424,7 @@ export default function BudgetPage() {
                       <TableCell className="font-medium">{index + 1}</TableCell>
                       <TableCell>{expense.name}</TableCell>
                       <TableCell>{expense.date}</TableCell>
-                      <TableCell>${expense.amount.toFixed(2)}</TableCell>
+                      <TableCell>Rs. {expense.amount.toFixed(2)}</TableCell>
                       <TableCell>{expense.category}</TableCell>
                     </TableRow>
                   ))}
